@@ -1,11 +1,25 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Level3Logo from '../components/Level3Logo';
 import TechChecklist from '../components/TechChecklist';
 import GridBackground from '../components/GridBackground';
+import '../App.css';
 
 const Index = () => {
+  useEffect(() => {
+    // This simulates the RGB shift effect mentioned in the example
+    const handleLogoEffect = () => {
+      const logoElement = document.querySelector('.glitch-container img');
+      if (!logoElement) return;
+      
+      // Apply additional visual effects here if needed
+      console.log('Logo effects initialized');
+    };
+    
+    handleLogoEffect();
+  }, []);
+  
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       <GridBackground />

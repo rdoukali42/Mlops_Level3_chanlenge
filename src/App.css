@@ -1,2 +1,120 @@
 
-/* This file is intentionally left empty as we're using the styles defined in index.css */
+/* This file contains enhanced glitch effects for the LEVEL3 logo */
+
+.glitch-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.glitch-image {
+  position: relative;
+  z-index: 1;
+}
+
+.glitch-image-1,
+.glitch-image-2,
+.glitch-image-3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.glitch-image-1 {
+  animation: glitch-1 4s infinite linear alternate-reverse;
+  filter: brightness(1.2);
+}
+
+.glitch-image-2 {
+  animation: glitch-2 4s infinite linear alternate-reverse;
+  filter: drop-shadow(4px 0 #0AFF16) contrast(150%) brightness(120%);
+}
+
+.glitch-image-3 {
+  animation: glitch-3 4s infinite linear alternate-reverse;
+  filter: drop-shadow(-4px 0 #FF00FF) contrast(150%) brightness(120%);
+}
+
+@keyframes glitch-1 {
+  0%, 100% { transform: none; opacity: 0.8; }
+  7% { transform: skew(-1deg, -1.5deg); opacity: 0.75; }
+  10% { transform: none; opacity: 0.8; }
+  27% { transform: none; opacity: 0.8; }
+  30% { transform: skew(1.5deg, -0.5deg); opacity: 0.75; }
+  35% { transform: none; opacity: 0.8; }
+  52% { transform: none; opacity: 0.8; }
+  55% { transform: skew(-2deg, 0.5deg); opacity: 0.75; }
+  50% { transform: none; opacity: 0.8; }
+  72% { transform: none; opacity: 0.8; }
+  75% { transform: skew(0.8deg, 1.5deg); opacity: 0.75; }
+  80% { transform: none; opacity: 0.8; }
+  92% { transform: none; opacity: 0.8; }
+  95% { transform: skew(-0.5deg, -1deg); opacity: 0.75; }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: none; opacity: 0.4; }
+  7% { transform: translate(-5px, 3px); opacity: 0.6; }
+  10% { transform: none; opacity: 0.4; }
+  27% { transform: none; opacity: 0.4; }
+  30% { transform: translate(-8px, -3px); opacity: 0.6; }
+  35% { transform: none; opacity: 0.4; }
+  52% { transform: none; opacity: 0.4; }
+  55% { transform: translate(8px, 2px); opacity: 0.6; }
+  50% { transform: none; opacity: 0.4; }
+  72% { transform: none; opacity: 0.4; }
+  75% { transform: translate(5px, 8px); opacity: 0.6; }
+  80% { transform: none; opacity: 0.4; }
+  92% { transform: none; opacity: 0.4; }
+  95% { transform: translate(-3px, 2px); opacity: 0.6; }
+}
+
+@keyframes glitch-3 {
+  0%, 100% { transform: none; opacity: 0.4; }
+  7% { transform: translate(5px, -4px); opacity: 0.6; }
+  10% { transform: none; opacity: 0.4; }
+  27% { transform: none; opacity: 0.4; }
+  30% { transform: translate(8px, 3px); opacity: 0.6; }
+  35% { transform: none; opacity: 0.4; }
+  52% { transform: none; opacity: 0.4; }
+  55% { transform: translate(-8px, -2px); opacity: 0.6; }
+  50% { transform: none; opacity: 0.4; }
+  72% { transform: none; opacity: 0.4; }
+  75% { transform: translate(-5px, -8px); opacity: 0.6; }
+  80% { transform: none; opacity: 0.4; }
+  92% { transform: none; opacity: 0.4; }
+  95% { transform: translate(3px, -2px); opacity: 0.6; }
+}
+
+/* RGB Shift filter overlay */
+.logo-rgb-shift {
+  position: relative;
+  z-index: 10;
+  animation: rgb-shift 2s infinite alternate;
+}
+
+@keyframes rgb-shift {
+  0% {
+    filter: drop-shadow(2px 0 0 rgba(255, 0, 0, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(0, 255, 0, 0.5))
+           drop-shadow(0 2px 0 rgba(0, 0, 255, 0.5));
+  }
+  33% {
+    filter: drop-shadow(2px 0 0 rgba(0, 255, 0, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(0, 0, 255, 0.5))
+           drop-shadow(0 2px 0 rgba(255, 0, 0, 0.5));
+  }
+  66% {
+    filter: drop-shadow(2px 0 0 rgba(0, 0, 255, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(255, 0, 0, 0.5))
+           drop-shadow(0 2px 0 rgba(0, 255, 0, 0.5));
+  }
+  100% {
+    filter: drop-shadow(3px 0 0 rgba(255, 0, 0, 0.5)) 
+           drop-shadow(-3px 0 0 rgba(0, 255, 0, 0.5))
+           drop-shadow(0 3px 0 rgba(0, 0, 255, 0.5));
+  }
+}

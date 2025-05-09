@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -18,12 +19,22 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'cyber': ['JetBrains Mono', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				cyber: {
+					green: '#0AFF16',
+					darkgreen: '#00CC00',
+					lightgreen: '#7FFF00',
+					black: '#111111',
+					grid: '#0D2E0D',
+				},
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
@@ -52,45 +63,73 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
-			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
-				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+				"accordion-down": {
+					from: { height: '0' },
+					to: { height: "var(--radix-accordion-content-height)" },
 				},
-				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+				"accordion-up": {
+					from: { height: "var(--radix-accordion-content-height)" },
+					to: { height: '0' },
+				},
+				"glitch-1": {
+					"0%, 100%": { transform: "none", opacity: "1" },
+					"7%": { transform: "skew(-0.5deg, -0.9deg)", opacity: "0.75" },
+					"10%": { transform: "none", opacity: "1" },
+					"27%": { transform: "none", opacity: "1" },
+					"30%": { transform: "skew(0.8deg, -0.1deg)", opacity: "0.75" },
+					"35%": { transform: "none", opacity: "1" },
+					"52%": { transform: "none", opacity: "1" },
+					"55%": { transform: "skew(-1deg, 0.2deg)", opacity: "0.75" },
+					"50%": { transform: "none", opacity: "1" },
+					"72%": { transform: "none", opacity: "1" },
+					"75%": { transform: "skew(0.4deg, 1deg)", opacity: "0.75" },
+					"80%": { transform: "none", opacity: "1" },
+					"92%": { transform: "none", opacity: "1" },
+					"95%": { transform: "skew(-0.2deg, -0.6deg)", opacity: "0.75" },
+				},
+				"glitch-2": {
+					"0%, 100%": { transform: "none", opacity: "0.25" },
+					"7%": { transform: "translate(-2px, 3px)", opacity: "0.5" },
+					"10%": { transform: "none", opacity: "0.25" },
+					"27%": { transform: "none", opacity: "0.25" },
+					"30%": { transform: "translate(-5px, -2px)", opacity: "0.5" },
+					"35%": { transform: "none", opacity: "0.25" },
+					"52%": { transform: "none", opacity: "0.25" },
+					"55%": { transform: "translate(5px, 1px)", opacity: "0.5" },
+					"50%": { transform: "none", opacity: "0.25" },
+					"72%": { transform: "none", opacity: "0.25" },
+					"75%": { transform: "translate(3px, 6px)", opacity: "0.5" },
+					"80%": { transform: "none", opacity: "0.25" },
+					"92%": { transform: "none", opacity: "0.25" },
+					"95%": { transform: "translate(-2px, 1px)", opacity: "0.5" },
+				},
+				"glitch-3": {
+					"0%, 100%": { transform: "none", opacity: "0.25" },
+					"7%": { transform: "translate(2px, -3px)", opacity: "0.5" },
+					"10%": { transform: "none", opacity: "0.25" },
+					"27%": { transform: "none", opacity: "0.25" },
+					"30%": { transform: "translate(5px, 2px)", opacity: "0.5" },
+					"35%": { transform: "none", opacity: "0.25" },
+					"52%": { transform: "none", opacity: "0.25" },
+					"55%": { transform: "translate(-5px, -1px)", opacity: "0.5" },
+					"50%": { transform: "none", opacity: "0.25" },
+					"72%": { transform: "none", opacity: "0.25" },
+					"75%": { transform: "translate(-3px, -6px)", opacity: "0.5" },
+					"80%": { transform: "none", opacity: "0.25" },
+					"92%": { transform: "none", opacity: "0.25" },
+					"95%": { transform: "translate(2px, -1px)", opacity: "0.5" },
+				},
 			},
 			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
-		}
+				"accordion-down": "accordion-down 0.2s ease-out",
+				"accordion-up": "accordion-up 0.2s ease-out",
+				"glitch-1": "glitch-1 4s infinite linear alternate-reverse",
+				"glitch-2": "glitch-2 4s infinite linear alternate-reverse",
+				"glitch-3": "glitch-3 4s infinite linear alternate-reverse",
+			},
+		},
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;

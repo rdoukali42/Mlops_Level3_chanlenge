@@ -1,8 +1,9 @@
 
 import React from 'react';
+import ThreeScene from './ThreeScene';
 
 const GridBackground = () => {
-  return <div className="grid-background"></div>;
+  return <ThreeScene />;
 };
 
 export default GridBackground;

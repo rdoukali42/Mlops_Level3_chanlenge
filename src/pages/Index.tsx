@@ -2,7 +2,7 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
 import Level3Logo from '../components/Level3Logo';
-import TechChecklist from '../components/TechChecklist';
+import ChatInterface from '../components/ChatInterface';
 import GridBackground from '../components/GridBackground';
 import '../App.css';
 
@@ -17,7 +17,7 @@ const Index = () => {
         <div className="max-w-4xl w-full mx-auto">
           <Level3Logo />
           
-          <TechChecklist />
+          <ChatInterface />
         </div>
       </main>
       

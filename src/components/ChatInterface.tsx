@@ -2,12 +2,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Send, Upload } from "lucide-react";
+import { Send, Upload, Mic } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import { Progress } from "@/components/ui/progress";
 
 interface Message {
   id: string;
-  type: 'user' | 'assistant';
+  type: 'user' | 'assistant' | 'system';
   content: string;
 }
 
@@ -20,6 +21,7 @@ const ChatInterface = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [connectionRetries, setConnectionRetries] = useState(0);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,51 +52,82 @@ const ChatInterface = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
+      // The response was successful, now listen for a response
+      setConnectionRetries(0);
       setIsListening(true);
-      
-      // Poll for response
-      let attempts = 0;
-      const maxAttempts = 60; // 5 minutes (5 * 60) with 5-second intervals
-      
-      const checkResponse = async () => {
-        try {
-          const getResponse = await fetch("https://rofex2.app.n8n.cloud/webhook-test/b4c4dc8d-5f18-43f8-a2e3-45f45074dcb6", {
-            method: 'GET'
-          });
-          
-          if (getResponse.ok) {
-            const data = await getResponse.text();
-            if (data && data !== 'Processing') {
-              setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: data }]);
-              setIsListening(false);
-              setIsLoading(false);
-              return;
-            }
-          }
-          
-          attempts++;
-          
-          if (attempts < maxAttempts) {
-            setTimeout(checkResponse, 5000); // Check every 5 seconds
-          } else {
-            setIsListening(false);
-            setIsLoading(false);
-            setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: 'Sorry, I didn\'t receive a response in time.' }]);
-          }
-        } catch (error) {
-          console.error("Error checking response:", error);
-          setIsListening(false);
-          setIsLoading(false);
-          toast.error("Error receiving response from the model");
-        }
-      };
-      
-      checkResponse();
+      startPollingForResponse();
     } catch (error) {
       console.error("Error sending message:", error);
       setIsLoading(false);
-      toast.error("Failed to send your message");
+      toast.error("Failed to send your message. The API service might be unavailable.");
+      setMessages(prev => [...prev, { 
+        id: Date.now().toString(), 
+        type: 'system', 
+        content: "⚠️ Connection error: Could not reach the assistant. Please try again in a moment." 
+      }]);
     }
+  };
+
+  const startPollingForResponse = async () => {
+    let attempts = 0;
+    const maxAttempts = 60; // 5 minutes with 5-second intervals
+    
+    const checkResponse = async () => {
+      if (attempts >= maxAttempts) {
+        handlePollingTimeout();
+        return;
+      }
+
+      try {
+        const getResponse = await fetch("https://rofex2.app.n8n.cloud/webhook-test/b4c4dc8d-5f18-43f8-a2e3-45f45074dcb6", {
+          method: 'GET'
+        });
+        
+        if (getResponse.ok) {
+          const data = await getResponse.text();
+          if (data && data !== 'Processing') {
+            setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: data }]);
+            setIsListening(false);
+            setIsLoading(false);
+            return;
+          }
+        }
+        
+        attempts++;
+        setTimeout(checkResponse, 5000); // Check every 5 seconds
+      } catch (error) {
+        console.error("Error checking response:", error);
+        attempts++;
+        
+        // If we've had multiple failures, stop polling
+        if (attempts > 3) {
+          setIsListening(false);
+          setIsLoading(false);
+          toast.error("Error receiving response from the model");
+          setMessages(prev => [...prev, { 
+            id: Date.now().toString(), 
+            type: 'system', 
+            content: "⚠️ Connection lost: Could not retrieve the response. The assistant might be unavailable." 
+          }]);
+        } else {
+          // Try again after a delay
+          setTimeout(checkResponse, 5000);
+        }
+      }
+    };
+    
+    checkResponse();
+  };
+
+  const handlePollingTimeout = () => {
+    setIsListening(false);
+    setIsLoading(false);
+    toast.error("Response time exceeded, please try again");
+    setMessages(prev => [...prev, { 
+      id: Date.now().toString(), 
+      type: 'system', 
+      content: "⏱️ Timeout: The assistant took too long to respond. Please try again." 
+    }]);
   };
 
   const handleUploadClick = () => {
@@ -133,49 +166,17 @@ const ChatInterface = () => {
           
           // Start polling for response
           setIsListening(true);
-          
-          let attempts = 0;
-          const maxAttempts = 120; // 10 minutes with 5-second intervals
-          
-          const checkUploadResponse = async () => {
-            try {
-              const getResponse = await fetch("https://rofex2.app.n8n.cloud/webhook-test/f821caa1-159d-4354-a7f2-b639c34f0b72", {
-                method: 'GET'
-              });
-              
-              if (getResponse.ok) {
-                const data = await getResponse.text();
-                if (data && data !== 'Processing') {
-                  setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: data }]);
-                  setIsListening(false);
-                  return;
-                }
-              }
-              
-              attempts++;
-              
-              if (attempts < maxAttempts) {
-                setTimeout(checkUploadResponse, 5000); // Check every 5 seconds
-              } else {
-                setIsListening(false);
-                setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: 'Sorry, processing your file took longer than expected.' }]);
-              }
-            } catch (error) {
-              console.error("Error checking file processing:", error);
-              setIsListening(false);
-              toast.error("Error receiving file analysis");
-            }
-          };
-          
-          checkUploadResponse();
+          startPollingForFileResponse();
         } else {
           handleUploadError();
         }
       };
       
       xhr.onerror = handleUploadError;
+      xhr.ontimeout = handleUploadError;
       
       xhr.open('POST', 'https://rofex2.app.n8n.cloud/webhook-test/f821caa1-159d-4354-a7f2-b639c34f0b72', true);
+      xhr.timeout = 30000; // 30 seconds timeout
       xhr.send(formData);
     } catch (error) {
       handleUploadError();
@@ -187,11 +188,65 @@ const ChatInterface = () => {
     }
   };
   
+  const startPollingForFileResponse = async () => {
+    let attempts = 0;
+    const maxAttempts = 120; // 10 minutes with 5-second intervals
+    
+    const checkUploadResponse = async () => {
+      if (attempts >= maxAttempts) {
+        handlePollingTimeout();
+        return;
+      }
+
+      try {
+        const getResponse = await fetch("https://rofex2.app.n8n.cloud/webhook-test/f821caa1-159d-4354-a7f2-b639c34f0b72", {
+          method: 'GET'
+        });
+        
+        if (getResponse.ok) {
+          const data = await getResponse.text();
+          if (data && data !== 'Processing') {
+            setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: data }]);
+            setIsListening(false);
+            return;
+          }
+        }
+        
+        attempts++;
+        setTimeout(checkUploadResponse, 5000); // Check every 5 seconds
+      } catch (error) {
+        console.error("Error checking file processing:", error);
+        attempts++;
+        
+        // If we've had multiple failures, stop polling
+        if (attempts > 3) {
+          setIsListening(false);
+          toast.error("Error receiving file analysis");
+          setMessages(prev => [...prev, { 
+            id: Date.now().toString(), 
+            type: 'system', 
+            content: "⚠️ Connection issue: Could not retrieve the file analysis. The service might be unavailable." 
+          }]);
+        } else {
+          // Try again after a delay
+          setTimeout(checkUploadResponse, 5000);
+        }
+      }
+    };
+    
+    checkUploadResponse();
+  };
+  
   const handleUploadError = () => {
     console.error("Error uploading file");
     setIsUploading(false);
     setUploadProgress(0);
     toast.error("Failed to upload file");
+    setMessages(prev => [...prev, { 
+      id: Date.now().toString(), 
+      type: 'system', 
+      content: "⚠️ Upload failed: Could not upload your file. The service might be unavailable." 
+    }]);
   };
 
   return (
@@ -210,6 +265,8 @@ const ChatInterface = () => {
               className={`max-w-[80%] rounded-lg px-4 py-2 ${
                 message.type === 'user'
                   ? 'bg-cyber-green/20 text-white border border-cyber-green/40'
+                  : message.type === 'system'
+                  ? 'bg-orange-950/60 text-orange-200 border border-orange-500/40'
                   : 'bg-black/60 text-cyber-green border border-cyber-green/20'
               }`}
             >
@@ -231,11 +288,14 @@ const ChatInterface = () => {
         )}
         
         {isUploading && (
-          <div className="w-full bg-gray-800 rounded-full h-2.5">
-            <div 
-              className="bg-cyber-green h-2.5 rounded-full" 
-              style={{ width: `${uploadProgress}%` }}
-            ></div>
+          <div className="w-full space-y-2">
+            <Progress value={uploadProgress} className="h-2 bg-gray-800 border border-cyber-green/20">
+              <div 
+                className="h-full bg-cyber-green rounded-full"
+                style={{ width: `${uploadProgress}%` }}
+              />
+            </Progress>
+            <span className="text-xs text-cyber-green/70">Uploading: {uploadProgress}%</span>
           </div>
         )}
         
@@ -251,6 +311,7 @@ const ChatInterface = () => {
             onClick={handleUploadClick}
             disabled={isUploading || isLoading}
             className="border border-cyber-green/50 text-cyber-green hover:bg-cyber-green/20"
+            title="Upload file"
           >
             <Upload size={18} />
           </Button>
@@ -275,14 +336,15 @@ const ChatInterface = () => {
             variant="outline"
             size="icon"
             className="border border-cyber-green/50 text-cyber-green hover:bg-cyber-green/20"
+            title="Send message"
           >
             <Send size={18} />
           </Button>
         </form>
         
         <div className="mt-2 text-xs text-cyber-green/50 flex justify-between">
-          {isListening && <span>Listening for response...</span>}
-          {(isUploading || uploadProgress > 0) && <span>Upload: {uploadProgress}%</span>}
+          {isListening && <span>Waiting for response...</span>}
+          {connectionRetries > 0 && <span>Connection issues detected. Retrying...</span>}
         </div>
       </div>
     </div>

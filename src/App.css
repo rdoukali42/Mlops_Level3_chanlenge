@@ -118,3 +118,47 @@
            drop-shadow(0 3px 0 rgba(0, 0, 255, 0.5));
   }
 }
+
+/* 3D Card Effects */
+.floating-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.floating-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 30px -10px rgba(92, 216, 177, 0.3);
+}
+
+/* Make sure scrolling behavior is smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for a more cyberpunk feel */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5CD8B1;
+  background: linear-gradient(180deg, #5CD8B1 0%, #0a0a0a 100%);
+  border-radius: 6px;
+  border: 3px solid #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4BC9A2;
+}
+
+/* Make content cards have better spacing on mobile */
+@media (max-width: 768px) {
+  .card-container {
+    padding: 1rem;
+  }
+}

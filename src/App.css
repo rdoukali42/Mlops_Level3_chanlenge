@@ -30,7 +30,7 @@
 
 .glitch-image-2 {
   animation: glitch-2 4s infinite linear alternate-reverse;
-  filter: drop-shadow(4px 0 #0AFF16) contrast(150%) brightness(120%);
+  filter: drop-shadow(4px 0 #5CD8B1) contrast(150%) brightness(120%);
 }
 
 .glitch-image-3 {

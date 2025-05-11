@@ -1,22 +1,25 @@
 
 import React from 'react';
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   return (
     <nav className="py-4 px-6 flex justify-between items-center w-full">
       <div className="flex items-center">
-        <img 
-          src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
-          alt="LEVEL3" 
-          className="h-10 mr-2" 
-        />
+        <Link to="/">
+          <img 
+            src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
+            alt="LEVEL3" 
+            className="h-10 mr-2" 
+          />
+        </Link>
       </div>
       
       <div className="flex items-center space-x-8">
-        <a href="#tracks" className="text-cyber-green hover:text-cyber-lightgreen transition-colors font-medium">/tracks</a>
-        <a href="#program" className="text-cyber-green hover:text-cyber-lightgreen transition-colors font-medium">/program</a>
-        <a href="#partners" className="text-cyber-green hover:text-cyber-lightgreen transition-colors font-medium">/partners</a>
+        <Link to="/data" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Data</Link>
+        <Link to="/model" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Model</Link>
+        <Link to="/chat" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Chat</Link>
         <button className="cyber-button">Apply Now</button>
       </div>
     </nav>

@@ -28,7 +28,7 @@ const MessageList = ({ messages, isLoading }: MessageListProps) => {
                 ? 'bg-cyber-green/20 text-white border border-cyber-green/40'
                 : message.type === 'system'
                 ? 'bg-orange-950/60 text-orange-200 border border-orange-500/40'
-                : 'bg-black/60 text-cyber-green border border-cyber-green/20'
+                : 'bg-black/60 text-white border border-cyber-green/20'
             }`}
           >
             <p className="whitespace-pre-wrap">{message.content}</p>
@@ -38,7 +38,7 @@ const MessageList = ({ messages, isLoading }: MessageListProps) => {
       
       {isLoading && (
         <div className="flex justify-start">
-          <div className="max-w-[80%] rounded-lg px-4 py-2 bg-black/60 text-cyber-green border border-cyber-green/20">
+          <div className="max-w-[80%] rounded-lg px-4 py-2 bg-black/60 text-white border border-cyber-green/20">
             <div className="flex items-center space-x-2">
               <div className="w-2 h-2 rounded-full bg-cyber-green animate-pulse"></div>
               <div className="w-2 h-2 rounded-full bg-cyber-green animate-pulse delay-150"></div>

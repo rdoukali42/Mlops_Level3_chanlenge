@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -29,8 +28,8 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				cyber: {
-					green: '#0AFF16',
-					darkgreen: '#00CC00',
+					green: '#5CD8B1',
+					darkgreen: '#4BC9A2',
 					lightgreen: '#7FFF00',
 					black: '#111111',
 					grid: '#0D2E0D',
@@ -71,7 +70,6 @@ export default {
 				},
 				"accordion-up": {
 					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: '0' },
 				},
 				"glitch-1": {
 					"0%, 100%": { transform: "none", opacity: "1" },

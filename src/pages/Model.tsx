@@ -3,9 +3,9 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import Level3Logo from '../components/Level3Logo';
 import GridBackground from '../components/GridBackground';
-import '../App.css';
+import ComingSoon from '../components/ComingSoon';
 
-const Index = () => {
+const Model = () => {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
       <GridBackground />
@@ -15,6 +15,7 @@ const Index = () => {
       <main className="flex-1 flex flex-col items-center justify-center px-4">
         <div className="max-w-4xl w-full mx-auto">
           <Level3Logo />
+          <ComingSoon text="Coming Soon" />
         </div>
       </main>
       
@@ -27,4 +28,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Model;

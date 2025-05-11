@@ -16,7 +16,7 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 71% 45%;
+    --primary: 168 59% 58%;
     --primary-foreground: 0 0% 9%;
 
     --secondary: 0 0% 9%;
@@ -25,7 +25,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 142 70% 50%;
+    --accent: 168 59% 58%;
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 62.8% 30.6%;
@@ -33,7 +33,7 @@
 
     --border: 0 0% 15%;
     --input: 0 0% 15%;
-    --ring: 142 71% 45%;
+    --ring: 168 59% 58%;
 
     --radius: 0.5rem;
   }
@@ -107,7 +107,7 @@
 
   .glitch-image-2 {
     @apply animate-glitch-2;
-    filter: drop-shadow(2px 0 #0AFF16) contrast(120%) brightness(120%);
+    filter: drop-shadow(2px 0 #5CD8B1) contrast(120%) brightness(120%);
   }
 
   .glitch-image-3 {
@@ -122,7 +122,7 @@
   width: 1.25rem;
   height: 1.25rem;
   background-color: transparent;
-  border: 1px solid #0AFF16;
+  border: 1px solid #5CD8B1;
   position: relative;
   border-radius: 0.125rem;
   cursor: pointer;
@@ -140,7 +140,7 @@
   transform: translate(-50%, -50%);
   width: 0.75rem;
   height: 0.75rem;
-  background-color: #0AFF16;
+  background-color: #5CD8B1;
   border-radius: 0.125rem;
 }
 
@@ -148,7 +148,7 @@
 .cyber-button {
   position: relative;
   padding: 0.75rem 1.5rem;
-  background-color: #0AFF16;
+  background-color: #5CD8B1;
   color: #000000;
   border: none;
   border-radius: 4px;
@@ -160,9 +160,9 @@
 }
 
 .cyber-button:hover {
-  background-color: #00CC00;
+  background-color: #4BC9A2;
   transform: translateY(-2px);
-  box-shadow: 0 0 8px rgba(10, 255, 22, 0.8);
+  box-shadow: 0 0 8px rgba(92, 216, 177, 0.8);
 }
 
 .cyber-button:before {
@@ -173,7 +173,7 @@
   right: -4px;
   bottom: -4px;
   z-index: -1;
-  background: linear-gradient(45deg, #0AFF16, #00CC00, #0AFF16);
+  background: linear-gradient(45deg, #5CD8B1, #4BC9A2, #5CD8B1);
   background-size: 200% 200%;
   animation: gradient 3s linear infinite;
   opacity: 0;

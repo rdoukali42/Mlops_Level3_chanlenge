@@ -19,7 +19,7 @@ const MessageInput = ({ inputMessage, setInputMessage, handleSendMessage, disabl
         onChange={(e) => setInputMessage(e.target.value)}
         placeholder="Type a message..."
         disabled={disabled}
-        className="flex-1 bg-transparent border-cyber-green/50 text-white focus-visible:ring-cyber-green/30 focus-visible:border-cyber-green"
+        className="flex-1 bg-transparent border-5CD8B1/50 text-white focus-visible:ring-5CD8B1/30 focus-visible:border-5CD8B1"
       />
       
       <Button
@@ -27,7 +27,7 @@ const MessageInput = ({ inputMessage, setInputMessage, handleSendMessage, disabl
         disabled={!inputMessage.trim() || disabled}
         variant="outline"
         size="icon"
-        className="border border-cyber-green/50 text-cyber-green hover:bg-cyber-green/20"
+        className="border border-5CD8B1/50 text-5CD8B1 hover:bg-5CD8B1/20"
         title="Send message"
       >
         <Send size={18} />

@@ -33,7 +33,18 @@ const ChatInterface = () => {
     setIsLoading(true);
     
     try {
-      await sendChatMessage(inputMessage);
+      const result = await sendChatMessage(inputMessage);
+      
+      if (result.status === 'error') {
+        toast.error(result.message || "Failed to send message");
+        setMessages(prev => [...prev, { 
+          id: Date.now().toString(), 
+          type: 'system', 
+          content: `⚠️ ${result.message || "Connection error: Could not reach the assistant. Please try again in a moment."}` 
+        }]);
+        setIsLoading(false);
+        return;
+      }
       
       setConnectionRetries(0);
       setIsListening(true);
@@ -113,23 +124,70 @@ const ChatInterface = () => {
 
     const file = files[0];
     setIsUploading(true);
+    setUploadProgress(20); // Initial progress for better UX
     setMessages(prev => [...prev, { id: Date.now().toString(), type: 'user', content: `Uploading file: ${file.name}` }]);
     
-    // Upload the file with progress tracking
-    uploadFile(
-      file,
-      (progress) => setUploadProgress(progress),
-      (successMessage) => {
-        setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: successMessage }]);
+    try {
+      // Update progress for UX purposes
+      const updateProgress = () => {
+        const progressSteps = [40, 60, 80];
+        let currentStep = 0;
+        
+        const interval = setInterval(() => {
+          if (currentStep < progressSteps.length) {
+            setUploadProgress(progressSteps[currentStep]);
+            currentStep++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 800);
+        
+        return () => clearInterval(interval);
+      };
+      
+      const progressUpdater = updateProgress();
+      
+      // Upload the file
+      const result = await uploadFile(file);
+      
+      // Set final progress regardless of outcome
+      setUploadProgress(100);
+      
+      // Clear the progress updater
+      progressUpdater();
+      
+      // Handle file upload result
+      if (result.status === 'error') {
+        toast.error(result.message);
+        setMessages(prev => [...prev, { 
+          id: Date.now().toString(), 
+          type: 'system', 
+          content: `⚠️ Upload failed: ${result.message}` 
+        }]);
         setIsUploading(false);
         setUploadProgress(0);
+      } else {
+        setMessages(prev => [...prev, { 
+          id: Date.now().toString(), 
+          type: 'assistant', 
+          content: result.message 
+        }]);
         
         // Start polling for response
         setIsListening(true);
         startPollingForFileResponse();
-      },
-      (error) => handleUploadError(error)
-    );
+      }
+    } catch (error: any) {
+      console.error("Error uploading file:", error);
+      toast.error("Failed to upload file");
+      setMessages(prev => [...prev, { 
+        id: Date.now().toString(), 
+        type: 'system', 
+        content: `⚠️ Upload failed: ${error instanceof Error ? error.message : "Could not upload your file. The service might be unavailable."}` 
+      }]);
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
     
     // Reset the file input
     e.target.value = '';
@@ -151,6 +209,8 @@ const ChatInterface = () => {
         if (responseContent) {
           setMessages(prev => [...prev, { id: Date.now().toString(), type: 'assistant', content: responseContent }]);
           setIsListening(false);
+          setIsUploading(false);
+          setUploadProgress(0);
           return;
         }
         
@@ -163,6 +223,8 @@ const ChatInterface = () => {
         // If we've had multiple failures, stop polling
         if (attempts > 3) {
           setIsListening(false);
+          setIsUploading(false);
+          setUploadProgress(0);
           toast.error("Error receiving file analysis");
           setMessages(prev => [...prev, { 
             id: Date.now().toString(), 
@@ -178,23 +240,11 @@ const ChatInterface = () => {
     
     checkUploadResponse();
   };
-  
-  const handleUploadError = (error: Error) => {
-    console.error("Error uploading file:", error);
-    setIsUploading(false);
-    setUploadProgress(0);
-    toast.error("Failed to upload file");
-    setMessages(prev => [...prev, { 
-      id: Date.now().toString(), 
-      type: 'system', 
-      content: "⚠️ Upload failed: Could not upload your file. The service might be unavailable." 
-    }]);
-  };
 
   return (
-    <div className="max-w-2xl w-full mx-auto mt-12 bg-black/40 border border-cyber-green/30 rounded-lg overflow-hidden backdrop-blur-sm">
-      <div className="p-4 border-b border-cyber-green/30">
-        <h2 className="text-cyber-green text-xl font-cyber">AI Assistant</h2>
+    <div className="max-w-2xl w-full mx-auto mt-12 bg-black/40 border border-5CD8B1/30 rounded-lg overflow-hidden backdrop-blur-sm">
+      <div className="p-4 border-b border-5CD8B1/30">
+        <h2 className="text-5CD8B1 text-xl font-cyber">AI Assistant</h2>
       </div>
       
       <MessageList 
@@ -202,7 +252,7 @@ const ChatInterface = () => {
         isLoading={isLoading}
       />
       
-      <div className="p-4 border-t border-cyber-green/30">
+      <div className="p-4 border-t border-5CD8B1/30">
         <div className="flex space-x-2">
           <FileUploader
             onFileUpload={handleFileUpload}
@@ -219,7 +269,7 @@ const ChatInterface = () => {
           />
         </div>
         
-        <div className="mt-2 text-xs text-cyber-green/50 flex justify-between">
+        <div className="mt-2 text-xs text-5CD8B1/50 flex justify-between">
           {isListening && <span>Waiting for response...</span>}
           {connectionRetries > 0 && <span>Connection issues detected. Retrying...</span>}
         </div>

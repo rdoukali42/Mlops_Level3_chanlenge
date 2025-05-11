@@ -26,7 +26,7 @@ const FileUploader = ({ onFileUpload, isUploading, uploadProgress, disabled }: F
         size="icon"
         onClick={handleUploadClick}
         disabled={disabled}
-        className="border border-cyber-green/50 text-cyber-green hover:bg-cyber-green/20"
+        className="border border-5CD8B1/50 text-5CD8B1 hover:bg-5CD8B1/20"
         title="Upload file"
       >
         <Upload size={18} />
@@ -41,13 +41,13 @@ const FileUploader = ({ onFileUpload, isUploading, uploadProgress, disabled }: F
       
       {isUploading && (
         <div className="w-full space-y-2 mt-2">
-          <Progress value={uploadProgress} className="h-2 bg-gray-800 border border-cyber-green/20">
+          <Progress value={uploadProgress} className="h-2 bg-gray-800 border border-5CD8B1/20">
             <div 
-              className="h-full bg-cyber-green rounded-full"
+              className="h-full bg-5CD8B1 rounded-full"
               style={{ width: `${uploadProgress}%` }}
             />
           </Progress>
-          <span className="text-xs text-cyber-green/70">Uploading: {uploadProgress}%</span>
+          <span className="text-xs text-5CD8B1/70">Uploading: {uploadProgress}%</span>
         </div>
       )}
     </>

@@ -12,3 +12,16 @@ export interface ApiResponse {
   text?: string;
   [key: string]: any;
 }
+
+export interface MessageActionResult {
+  status: 'success' | 'error';
+  message?: string;
+  modelResponse?: string;
+  userMessage?: string;
+}
+
+export interface FileUploadActionResult {
+  status: 'success' | 'error';
+  message: string;
+  fileName?: string;
+}

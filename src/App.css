@@ -131,6 +131,54 @@
   box-shadow: 0 20px 30px -10px rgba(92, 216, 177, 0.3);
 }
 
+/* Data Preparation Code Cards */
+.code-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.code-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.code-card:hover .overlay {
+  opacity: 0;
+}
+
+.code-card .content {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.code-card:hover .content {
+  opacity: 1;
+}
+
+.code-card pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.code-card .tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
 /* Make sure scrolling behavior is smooth */
 html {
   scroll-behavior: smooth;

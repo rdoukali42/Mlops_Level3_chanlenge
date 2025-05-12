@@ -18,6 +18,7 @@ const Navigation = () => {
       
       <div className="flex items-center space-x-8">
         <Link to="/data" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Data</Link>
+        <Link to="/data_prepare" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Data_Prepare</Link>
         <Link to="/model" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Model</Link>
         <Link to="/chat" className="text-white hover:text-5CD8B1/80 transition-colors font-medium">/Chat</Link>
         <button className="cyber-button">Apply Now</button>

@@ -7,12 +7,13 @@ const Navigation = () => {
   return (
     <nav className="py-4 px-6 flex justify-between items-center w-full">
       <div className="flex items-center">
-        <Link to="/">
+        <Link to="/" className="flex items-center">
           <img 
             src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
             alt="LEVEL3" 
             className="h-10 mr-2" 
           />
+          <span className="text-5CD8B1 font-cyber font-bold">MlOps</span>
         </Link>
       </div>
       

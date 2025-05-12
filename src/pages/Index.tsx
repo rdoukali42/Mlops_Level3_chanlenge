@@ -57,7 +57,7 @@ const Index = () => {
                       transform: 'perspective(1000px) rotateX(2deg)'
                     }}>
                 <CardHeader>
-                  <CardTitle className="text-5CD8B1">Regression Methods</CardTitle>
+                  <CardTitle>Regression Methods</CardTitle>
                   <CardDescription className="text-white/80">Understanding predictive modeling techniques</CardDescription>
                 </CardHeader>
                 <CardContent className="text-white/90 leading-relaxed">
@@ -78,7 +78,7 @@ const Index = () => {
                       transform: 'perspective(1000px) rotateX(2deg)'
                     }}>
                 <CardHeader>
-                  <CardTitle className="text-5CD8B1">Classification & Language Modeling</CardTitle>
+                  <CardTitle>Classification & Language Modeling</CardTitle>
                   <CardDescription className="text-white/80">From simple categorization to complex NLP</CardDescription>
                 </CardHeader>
                 <CardContent className="text-white/90 leading-relaxed">

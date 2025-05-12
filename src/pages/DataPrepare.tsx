@@ -143,7 +143,7 @@ const DataPrepare = () => {
           <div className="max-w-6xl w-full mx-auto">
             <div className="flex flex-col items-center mb-12">
               <Level3Logo />
-              <h2 className="text-3xl font-cyber font-bold text-white mt-8">Data Preparation</h2>
+              <h2 className="text-3xl font-cyber font-bold mt-8">Data Preparation</h2>
               <p className="text-5CD8B1 mt-2 max-w-2xl text-center">
                 Master essential techniques for transforming raw data into machine learning-ready formats
               </p>
@@ -176,7 +176,7 @@ const DataPrepare = () => {
                     
                     {/* Code preview that's visible on hover */}
                     <CardContent className="p-4 h-full">
-                      <h3 className="text-xl text-white font-bold mb-3">{snippet.title}</h3>
+                      <h3 className="text-xl font-bold mb-3">{snippet.title}</h3>
                       
                       <div className="rounded-md bg-black/60 p-3 font-mono text-sm mb-4 overflow-x-auto h-[calc(100%-90px)]">
                         <pre className="text-white whitespace-pre-wrap">
@@ -207,7 +207,7 @@ const DataPrepare = () => {
                   {activeSnippet === index && (
                     <div className="mt-2 relative bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-4 transition-all duration-300 flex flex-col">
                       <div className="flex justify-between items-center mb-3">
-                        <h4 className="text-lg text-white font-bold">{snippet.title} - Full Example</h4>
+                        <h4 className="text-lg font-bold">{snippet.title} - Full Example</h4>
                         <Button 
                           variant="ghost" 
                           size="sm" 
@@ -218,14 +218,14 @@ const DataPrepare = () => {
                         </Button>
                       </div>
                       
-                      <div className="relative">
+                      <div className="relative snippet-image-container">
                         {/* Image container */}
                         <div className="relative h-64 md:h-96 overflow-hidden rounded-md">
                           {Array.isArray(snippet.image) && snippet.image.length > 0 && (
                             <img 
                               src={snippet.image[currentImageIndex]} 
                               alt={`Full code example for ${snippet.title}`}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-contain"
                             />
                           )}
                         </div>

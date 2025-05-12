@@ -62,7 +62,7 @@ const DataPrepare = () => {
       color: "#ea384c", // Red
       title: "Drop Missing Values",
       code: `# Drop rows with missing values\ndf = df.dropna()\n# or for specific columns\ndf = df.dropna(subset=['column1', 'column2'])`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      image: ["https://opensource.com/sites/default/files/uploads/matplotlib.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
     },
     {
       type: "ADD",

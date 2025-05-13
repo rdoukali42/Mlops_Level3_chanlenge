@@ -36,6 +36,15 @@
     --ring: 168 59% 58%;
 
     --radius: 0.5rem;
+    
+    /* Add variables from the provided HTML */
+    --color-primary: #5cd8b1;
+    --color-secondary: #b15cd8;
+    --color-accent: #d8b15c;
+    --color-background: #000000;
+    --color-text: #ffffff;
+    --color-surface: #2a2a2a;
+    --primaryFilter: invert(85%) sepia(20%) saturate(1042%) hue-rotate(100deg) brightness(90%) contrast(86%);
   }
 
   * {
@@ -47,9 +56,10 @@
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #0a0a0a;
-    color: #ffffff;
+    background-color: var(--color-background);
+    color: var(--color-text);
     height: 100%;
+    scroll-behavior: smooth;
   }
 
   #root {
@@ -63,6 +73,7 @@
     flex-direction: column;
   }
 
+  /* New styles from provided HTML/CSS */
   .grid-background {
     position: fixed;
     top: 0;
@@ -80,9 +91,25 @@
     opacity: 0.3;
   }
 
+  /* Unified Header Colors */
+  h1, h2, h3, h4 {
+    color: var(--color-primary) !important;
+  }
+
+  /* Hover effects from provided styles */
+  a.hover-primary {
+    @apply transition-colors;
+  }
+  
+  a.hover-primary:hover {
+    color: var(--color-primary);
+  }
+
+  /* Glitch container styling */
   .glitch-container {
     position: relative;
     display: inline-block;
+    overflow: hidden;
   }
 
   .glitch-image {
@@ -103,90 +130,237 @@
 
   .glitch-image-1 {
     @apply animate-glitch-1;
+    filter: brightness(1.2);
   }
 
   .glitch-image-2 {
     @apply animate-glitch-2;
-    filter: drop-shadow(2px 0 #5CD8B1) contrast(120%) brightness(120%);
+    filter: drop-shadow(4px 0 #5CD8B1) contrast(150%) brightness(120%);
   }
 
   .glitch-image-3 {
     @apply animate-glitch-3;
-    filter: drop-shadow(-2px 0 #FF00FF) contrast(120%) brightness(120%);
+    filter: drop-shadow(-4px 0 #FF00FF) contrast(150%) brightness(120%);
+  }
+
+  /* Custom checkbox styling */
+  .cyber-checkbox {
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+    position: relative;
+    border-radius: 0.125rem;
+    cursor: pointer;
+  }
+
+  .cyber-checkbox:checked {
+    background-color: transparent;
+  }
+
+  .cyber-checkbox:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    background-color: var(--color-primary);
+    border-radius: 0.125rem;
+  }
+
+  /* Apply Button styling */
+  .apply-button {
+    @apply font-bold duration-300 hover:scale-105 inline-block px-8 py-4 rounded transition-all backdrop-blur-xs;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+  }
+
+  .apply-button span {
+    @apply group-hover:animate-pulse;
+  }
+
+  /* Background container from provided HTML */
+  #background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background-color: var(--color-background);
+  }
+
+  /* Animation fade-in from provided HTML */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Card styling from provided HTML */
+  .feature-card {
+    @apply flex flex-col bg-black/90 border border-[#5CD8B1]/20 h-full hover:border-[#5CD8B1] hover:scale-[1.02] p-8 rounded-lg transition-all;
+  }
+
+  /* Snippet images styles */
+  .snippet-image-container {
+    width: 80vw;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .snippet-image-container img {
+    width: 80vw;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* MlOps Caption */
+  .mlops-caption {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: -1rem;
+    position: relative;
   }
 }
 
-/* Custom checkbox styling */
-.cyber-checkbox {
-  appearance: none;
-  width: 1.25rem;
-  height: 1.25rem;
-  background-color: transparent;
-  border: 1px solid #5CD8B1;
+/* This file contains enhanced glitch effects for the LEVEL3 logo */
+@keyframes glitch-1 {
+  0%, 100% { transform: none; opacity: 0.8; }
+  7% { transform: skew(-1deg, -1.5deg); opacity: 0.75; }
+  10% { transform: none; opacity: 0.8; }
+  27% { transform: none; opacity: 0.8; }
+  30% { transform: skew(1.5deg, -0.5deg); opacity: 0.75; }
+  35% { transform: none; opacity: 0.8; }
+  52% { transform: none; opacity: 0.8; }
+  55% { transform: skew(-2deg, 0.5deg); opacity: 0.75; }
+  50% { transform: none; opacity: 0.8; }
+  72% { transform: none; opacity: 0.8; }
+  75% { transform: skew(0.8deg, 1.5deg); opacity: 0.75; }
+  80% { transform: none; opacity: 0.8; }
+  92% { transform: none; opacity: 0.8; }
+  95% { transform: skew(-0.5deg, -1deg); opacity: 0.75; }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { transform: none; opacity: 0.4; }
+  7% { transform: translate(-5px, 3px); opacity: 0.6; }
+  10% { transform: none; opacity: 0.4; }
+  27% { transform: none; opacity: 0.4; }
+  30% { transform: translate(-8px, -3px); opacity: 0.6; }
+  35% { transform: none; opacity: 0.4; }
+  52% { transform: none; opacity: 0.4; }
+  55% { transform: translate(8px, 2px); opacity: 0.6; }
+  50% { transform: none; opacity: 0.4; }
+  72% { transform: none; opacity: 0.4; }
+  75% { transform: translate(5px, 8px); opacity: 0.6; }
+  80% { transform: none; opacity: 0.4; }
+  92% { transform: none; opacity: 0.4; }
+  95% { transform: translate(-3px, 2px); opacity: 0.6; }
+}
+
+@keyframes glitch-3 {
+  0%, 100% { transform: none; opacity: 0.4; }
+  7% { transform: translate(5px, -4px); opacity: 0.6; }
+  10% { transform: none; opacity: 0.4; }
+  27% { transform: none; opacity: 0.4; }
+  30% { transform: translate(8px, 3px); opacity: 0.6; }
+  35% { transform: none; opacity: 0.4; }
+  52% { transform: none; opacity: 0.4; }
+  55% { transform: translate(-8px, -2px); opacity: 0.6; }
+  50% { transform: none; opacity: 0.4; }
+  72% { transform: none; opacity: 0.4; }
+  75% { transform: translate(-5px, -8px); opacity: 0.6; }
+  80% { transform: none; opacity: 0.4; }
+  92% { transform: none; opacity: 0.4; }
+  95% { transform: translate(3px, -2px); opacity: 0.6; }
+}
+
+/* RGB Shift filter overlay */
+.logo-rgb-shift {
   position: relative;
-  border-radius: 0.125rem;
-  cursor: pointer;
+  z-index: 10;
+  animation: rgb-shift 2s infinite alternate;
 }
 
-.cyber-checkbox:checked {
-  background-color: transparent;
+@keyframes rgb-shift {
+  0% {
+    filter: drop-shadow(2px 0 0 rgba(255, 0, 0, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(0, 255, 0, 0.5))
+           drop-shadow(0 2px 0 rgba(0, 0, 255, 0.5));
+  }
+  33% {
+    filter: drop-shadow(2px 0 0 rgba(0, 255, 0, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(0, 0, 255, 0.5))
+           drop-shadow(0 2px 0 rgba(255, 0, 0, 0.5));
+  }
+  66% {
+    filter: drop-shadow(2px 0 0 rgba(0, 0, 255, 0.5)) 
+           drop-shadow(-2px 0 0 rgba(255, 0, 0, 0.5))
+           drop-shadow(0 2px 0 rgba(0, 255, 0, 0.5));
+  }
+  100% {
+    filter: drop-shadow(3px 0 0 rgba(255, 0, 0, 0.5)) 
+           drop-shadow(-3px 0 0 rgba(0, 255, 0, 0.5))
+           drop-shadow(0 3px 0 rgba(0, 0, 255, 0.5));
+  }
 }
 
-.cyber-checkbox:checked::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.75rem;
-  height: 0.75rem;
-  background-color: #5CD8B1;
-  border-radius: 0.125rem;
+/* 3D Card Effects */
+.floating-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
-/* Custom button styling */
-.cyber-button {
-  position: relative;
-  padding: 0.75rem 1.5rem;
-  background-color: #5CD8B1;
-  color: #000000;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s;
-  overflow: hidden;
+.floating-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 30px -10px rgba(92, 216, 177, 0.3);
 }
 
-.cyber-button:hover {
-  background-color: #4BC9A2;
-  transform: translateY(-2px);
-  box-shadow: 0 0 8px rgba(92, 216, 177, 0.8);
+/* Make content cards have better spacing on mobile */
+@media (max-width: 768px) {
+  .card-container {
+    padding: 1rem;
+  }
+  
+  .snippet-image-container {
+    width: 95vw;
+  }
 }
 
-.cyber-button:before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  z-index: -1;
-  background: linear-gradient(45deg, #5CD8B1, #4BC9A2, #5CD8B1);
-  background-size: 200% 200%;
-  animation: gradient 3s linear infinite;
-  opacity: 0;
-  transition: opacity 0.3s;
+/* Custom scrollbar for a more cyberpunk feel */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5CD8B1;
+  background: linear-gradient(180deg, #5CD8B1 0%, #0a0a0a 100%);
   border-radius: 6px;
+  border: 3px solid #0a0a0a;
 }
 
-.cyber-button:hover:before {
-  opacity: 1;
-}
-
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+::-webkit-scrollbar-thumb:hover {
+  background: #4BC9A2;
 }

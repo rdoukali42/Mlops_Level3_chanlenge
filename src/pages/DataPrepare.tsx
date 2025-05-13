@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navigation from '../components/Navigation';
 import Level3Logo from '../components/Level3Logo';
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,7 +13,7 @@ const DataPrepare = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Handle scroll for parallax effect
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -42,7 +42,7 @@ const DataPrepare = () => {
   };
 
   // Preload images
-  React.useEffect(() => {
+  useEffect(() => {
     codeSnippets.forEach(snippet => {
       if (typeof snippet.image === 'string') {
         const img = new Image();
@@ -117,6 +117,9 @@ const DataPrepare = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative">
+      {/* Background Container - similar to the provided HTML */}
+      <div id="background-container"></div>
+      
       {/* Custom Parallax Background */}
       <div 
         className="fixed inset-0 w-full h-full bg-cover bg-center z-0"
@@ -142,9 +145,12 @@ const DataPrepare = () => {
         <main className="flex-1 flex flex-col items-center pt-10 px-6 pb-20">
           <div className="max-w-6xl w-full mx-auto">
             <div className="flex flex-col items-center mb-12">
-              <Level3Logo />
-              <h2 className="text-3xl font-cyber font-bold mt-8">Data Preparation</h2>
-              <p className="text-5CD8B1 mt-2 max-w-2xl text-center">
+              <div className="relative">
+                <Level3Logo />
+                <span className="mlops-caption text-[var(--color-primary)]">MLOps</span>
+              </div>
+              <h2 className="text-3xl font-cyber font-bold mt-8 text-[var(--color-primary)]">Data Preparation</h2>
+              <p className="text-[var(--color-primary)] mt-2 max-w-2xl text-center">
                 Master essential techniques for transforming raw data into machine learning-ready formats
               </p>
             </div>
@@ -164,7 +170,7 @@ const DataPrepare = () => {
                   >
                     {/* Overlay that fades on hover */}
                     <div 
-                      className="absolute inset-0 flex flex-col items-center justify-center p-6 transition-opacity duration-300 group-hover:opacity-0 hover:opacity-0"
+                      className="absolute inset-0 flex flex-col items-center justify-center p-6 transition-opacity duration-300 hover:opacity-0"
                       style={{ 
                         backgroundColor: `${snippet.color}30`, // 30% opacity
                         backdropFilter: 'blur(2px)',
@@ -176,7 +182,7 @@ const DataPrepare = () => {
                     
                     {/* Code preview that's visible on hover */}
                     <CardContent className="p-4 h-full">
-                      <h3 className="text-xl font-bold mb-3">{snippet.title}</h3>
+                      <h3 className="text-xl font-bold mb-3 text-[var(--color-primary)]">{snippet.title}</h3>
                       
                       <div className="rounded-md bg-black/60 p-3 font-mono text-sm mb-4 overflow-x-auto h-[calc(100%-90px)]">
                         <pre className="text-white whitespace-pre-wrap">
@@ -202,7 +208,7 @@ const DataPrepare = () => {
                   
                   {/* Show Full Snippet Button - Updated to match site green color */}
                   <Button 
-                    className="mt-2 w-full bg-black/50 border border-white/20 hover:bg-black/70 flex items-center justify-center text-5CD8B1"
+                    className="mt-2 w-full bg-black/50 border border-white/20 hover:bg-black/70 flex items-center justify-center text-[var(--color-primary)]"
                     onClick={() => handleSnippetToggle(index)}
                   >
                     <Code className="mr-2" size={16} />
@@ -213,7 +219,7 @@ const DataPrepare = () => {
                   {activeSnippet === index && (
                     <div className="mt-2 relative bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-4 transition-all duration-300 flex flex-col">
                       <div className="flex justify-between items-center mb-3">
-                        <h4 className="text-lg font-bold">{snippet.title} - Full Example</h4>
+                        <h4 className="text-lg font-bold text-[var(--color-primary)]">{snippet.title} - Full Example</h4>
                         <Button 
                           variant="ghost" 
                           size="sm" 
@@ -225,7 +231,7 @@ const DataPrepare = () => {
                       </div>
                       
                       <div className="relative snippet-image-container">
-                        {/* Image container with updated styling for original size display */}
+                        {/* Image container with updated styling to show original size */}
                         <div className="relative overflow-auto max-h-[80vh] rounded-md">
                           {Array.isArray(snippet.image) && snippet.image.length > 0 && (
                             <img 
@@ -277,9 +283,13 @@ const DataPrepare = () => {
           </div>
         </main>
         
-        <footer className="mt-auto py-6 text-5CD8B1/60 text-sm z-10">
-          <div className="container">
-            © {new Date().getFullYear()} LEVEL3. All rights reserved.
+        <footer className="bg-[var(--color-background)]/30 border-[var(--color-surface)] font-mono px-6 text-[var(--color-text)] border-t mt-auto py-4">
+          <div className="mx-auto max-w-6xl">
+            <div className="text-center border-t pt-4 text-sm">
+              <div className="flex items-center gap-4 flex-wrap justify-center">
+                <span>© {new Date().getFullYear()} LEVEL3. All rights reserved.</span>
+              </div>
+            </div>
           </div>
         </footer>
       </div>

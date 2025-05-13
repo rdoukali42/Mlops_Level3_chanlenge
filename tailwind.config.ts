@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -70,6 +71,7 @@ export default {
 				},
 				"accordion-up": {
 					from: { height: "var(--radix-accordion-content-height)" },
+					to: { height: "0" },
 				},
 				"glitch-1": {
 					"0%, 100%": { transform: "none", opacity: "1" },
@@ -119,6 +121,10 @@ export default {
 					"92%": { transform: "none", opacity: "0.25" },
 					"95%": { transform: "translate(2px, -1px)", opacity: "0.5" },
 				},
+				"fadeIn": {
+					"0%": { opacity: "0", transform: "translateY(10px)" },
+					"100%": { opacity: "1", transform: "translateY(0)" }
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +132,7 @@ export default {
 				"glitch-1": "glitch-1 4s infinite linear alternate-reverse",
 				"glitch-2": "glitch-2 4s infinite linear alternate-reverse",
 				"glitch-3": "glitch-3 4s infinite linear alternate-reverse",
+				"fade-in": "fadeIn 0.5s ease-in forwards",
 			},
 		},
 	},

@@ -182,10 +182,16 @@ const DataPrepare = () => {
                         <pre className="text-white whitespace-pre-wrap">
                           {snippet.code.split('\n').map((line, i) => (
                             <div key={i} className="leading-relaxed">
-                              {line.replace(/(#.*)/g, '<span style="color: #888">$1</span>')
-                                .replace(/\b(df|np|pd|from|import|sklearn|preprocessing)\b/g, '<span style="color: #5CD8B1">$1</span>')
-                                .replace(/\b(fit_transform|dropna|drop_duplicates|drop|corr|abs|quantile)\b/g, '<span style="color: #f59e0b">$1</span>')
-                                .replace(/\b(LabelEncoder|OneHotEncoder|MinMaxScaler)\b/g, '<span style="color: #818cf8">$1</span>')
+                              {/* Base16 Grayscale color scheme for Python syntax highlighting */}
+                              {line
+                                .replace(/(#.*)/g, '<span style="color: #888888">$1</span>') /* Comments */
+                                .replace(/\b(df|np|pd)\b/g, '<span style="color: #b8b8b8">$1</span>') /* Variables */
+                                .replace(/\b(from|import)\b/g, '<span style="color: #ab4642">$1</span>') /* Keywords */
+                                .replace(/\b(dropna|drop_duplicates|drop|corr|abs|quantile|fit_transform|log1p)\b/g, '<span style="color: #7cafc2">$1</span>') /* Functions */
+                                .replace(/\b(LabelEncoder|OneHotEncoder|MinMaxScaler|sklearn|preprocessing)\b/g, '<span style="color: #a1b56c">$1</span>') /* Classes */
+                                .replace(/'[^']*'|"[^"]*"/g, '<span style="color: #f7ca88">$&</span>') /* Strings */
+                                .replace(/\b(\d+(\.\d+)?)\b/g, '<span style="color: #dc9656">$1</span>') /* Numbers */
+                                .replace(/(\[|\])/g, '<span style="color: #ba8baf">$1</span>') /* Brackets */
                               }
                             </div>
                           ))}
@@ -194,16 +200,16 @@ const DataPrepare = () => {
                     </CardContent>
                   </Card>
                   
-                  {/* Show Full Snippet Button */}
+                  {/* Show Full Snippet Button - Updated to match site green color */}
                   <Button 
-                    className="mt-2 w-full bg-black/50 border border-white/20 hover:bg-black/70 flex items-center justify-center"
+                    className="mt-2 w-full bg-black/50 border border-white/20 hover:bg-black/70 flex items-center justify-center text-5CD8B1"
                     onClick={() => handleSnippetToggle(index)}
                   >
                     <Code className="mr-2" size={16} />
                     {activeSnippet === index ? 'Hide Full Snippet' : 'Show Full Snippet'}
                   </Button>
                   
-                  {/* Inline Image Viewer */}
+                  {/* Inline Image Viewer - Updated for better image display */}
                   {activeSnippet === index && (
                     <div className="mt-2 relative bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-4 transition-all duration-300 flex flex-col">
                       <div className="flex justify-between items-center mb-3">
@@ -219,13 +225,14 @@ const DataPrepare = () => {
                       </div>
                       
                       <div className="relative snippet-image-container">
-                        {/* Image container */}
-                        <div className="relative h-64 md:h-96 overflow-hidden rounded-md">
+                        {/* Image container with updated styling for original size display */}
+                        <div className="relative overflow-auto max-h-[80vh] rounded-md">
                           {Array.isArray(snippet.image) && snippet.image.length > 0 && (
                             <img 
                               src={snippet.image[currentImageIndex]} 
                               alt={`Full code example for ${snippet.title}`}
-                              className="w-full h-full object-contain"
+                              className="w-auto max-w-full h-auto object-contain mx-auto"
+                              style={{ maxHeight: "80vh" }}
                             />
                           )}
                         </div>

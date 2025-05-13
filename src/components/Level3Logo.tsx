@@ -69,10 +69,10 @@ const Level3Logo = () => {
         />
       </div>
       <div className="mlops-caption glitch-container -mt-4">
-        <span className="glitch-image">MlOps</span>
-        <span className="glitch-image-1">MlOps</span>
-        <span className="glitch-image-2">MlOps</span>
-        <span className="glitch-image-3">MlOps</span>
+        <span className="glitch-image">MLOps</span>
+        <span className="glitch-image-1">MLOps</span>
+        <span className="glitch-image-2">MLOps</span>
+        <span className="glitch-image-3">MLOps</span>
       </div>
     </div>
   );

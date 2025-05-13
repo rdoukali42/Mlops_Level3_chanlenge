@@ -25,7 +25,7 @@ const Index = () => {
       <div 
         className="fixed inset-0 w-full h-full bg-cover bg-center z-0"
         style={{
-          backgroundImage: 'url("/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png")',
+          backgroundImage: 'url("https://i.postimg.cc/BZXCxjdR/20250511-1339-3-D-Grid-Expansion-remix-01jtzj6zwkfmnsn748ercrmyng.png")',
           transform: `translateY(${scrollY * 0.4}px)`,
           filter: 'brightness(0.95)',
         }}

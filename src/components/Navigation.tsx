@@ -13,7 +13,7 @@ const Navigation = () => {
             alt="LEVEL3" 
             className="h-10 mr-2" 
           />
-          <span className="text-5CD8B1 font-cyber font-bold">MlOps</span>
+          <span className="text-5CD8B1 font-cyber font-bold">MLOps</span>
         </Link>
       </div>
       

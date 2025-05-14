@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '@n8n/chat/style.css';
+import '../App.css';
 import { createChat } from '@n8n/chat';
 import Navigation from '../components/Navigation';
 import GridBackground from '../components/GridBackground';

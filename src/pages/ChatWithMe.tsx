@@ -38,15 +38,16 @@ const ChatWithMe = () => {
         <div className="w-full max-w-4xl mx-auto mb-8">
           <h1 className="text-4xl font-bold text-[#5CD8B1] text-center mb-6">Chat with Me</h1>
           <div className="backdrop-blur-sm bg-black/40 border border-[#5CD8B1]/20 p-6 rounded-lg shadow-lg">
-            <p className="text-white/90 mb-4 text-center">
+{/*             <p className="text-white/90 mb-4 text-center">
               Use the chat widget in the bottom right corner to start a conversation. 
               The chat interface will automatically connect to our AI assistant.
-            </p>
+            </p> */}
+		 <div id="chat-container" className="w-full h-full"></div> 
           </div>
         </div>
         
         {/* This div serves as a container for the n8n chat which will be inserted by the createChat function */}
-        <div id="chat-container" className="w-full h-full"></div>
+        
       </div>
       
       <footer className="mt-auto py-6 text-[#5CD8B1]/60 text-sm z-10">

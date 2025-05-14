@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import '@n8n/chat/style.css';
 import { createChat } from '@n8n/chat';
@@ -11,7 +10,7 @@ const ChatWithMe = () => {
     try {
       createChat({
         webhookUrl: 'https://rofex2.app.n8n.cloud/webhook/898255f2-ef09-4845-a1e6-00229105e8ab/chat',
-	mode: 'window',
+	mode: 'embedded',
 	initialMessages: [
 		'Hi there! 👋',
 		'My name is Reda. How can I assist you today?'

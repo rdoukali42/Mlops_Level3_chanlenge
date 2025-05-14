@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navigation = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <nav className="py-4 px-6 flex justify-between items-center w-full">
       <div className="flex items-center">
@@ -21,7 +23,8 @@ const Navigation = () => {
        <Link to="/data" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Data</Link>
         <Link to="/data_prepare" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Data_Prepare</Link>
         <Link to="/model" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Model</Link>
-        <Link to="/chat" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Chat</Link>{/* <button className="cyber-button">Apply Now</button> */}
+        <Link to="/chat" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Chat</Link>
+        <Link to="/chat_with_me" className="text-white hover:text-[#5CD8B1] hover:opacity-80 transition-all font-medium">/Chat_with_me</Link>
       </div>
     </nav>
   );

@@ -9,6 +9,7 @@ import Data from "./pages/Data";
 import DataPrepare from "./pages/DataPrepare";
 import Model from "./pages/Model";
 import Chat from "./pages/Chat";
+import ChatWithMe from "./pages/ChatWithMe";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/data_prepare" element={<DataPrepare />} />
           <Route path="/model" element={<Model />} />
           <Route path="/chat" element={<Chat />} />
+          <Route path="/chat_with_me" element={<ChatWithMe />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

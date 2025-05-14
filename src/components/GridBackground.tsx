@@ -1,9 +1,9 @@
 
 import React from 'react';
-import ThreeScene from './ThreeScene';
+import Background from './ThreeScene';
 
 const GridBackground = () => {
-  return <ThreeScene />;
+  return <Background />;
 };
 
 export default GridBackground;

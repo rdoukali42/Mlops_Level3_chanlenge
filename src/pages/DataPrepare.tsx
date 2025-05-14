@@ -60,59 +60,62 @@ const DataPrepare = () => {
     {
       type: "Drop",
       color: "#ea384c", // Red
-      title: "Drop Missing Values",
-      code: `# Drop rows with missing values\ndf = df.dropna()\n# or for specific columns\ndf = df.dropna(subset=['column1', 'column2'])`,
-      image: ["https://opensource.com/sites/default/files/uploads/matplotlib.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      title: "Drop Year 2023",
+      code: "file = file[file['year'] != 2023]",
+      image: ["/lovable-uploads/Year_curve.png", "/lovable-uploads/Year-Data-Count.png"]
     },
     {
-      type: "ADD",
-      color: "#5CD8B1", // Green
-      title: "Add New Features",
-      code: `# Create new feature from existing ones\ndf['new_feature'] = df['feature1'] + df['feature2']\n# Apply mathematical transformation\ndf['log_feature'] = np.log1p(df['numeric_feature'])`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
-    },
-    {
-      type: "Encode",
-      color: "#33C3F0", // Blue
-      title: "One-Hot Encoding",
-      code: `# One-hot encode categorical variables\ndf_encoded = pd.get_dummies(df, columns=['category_col'])\n# or using scikit-learn\nfrom sklearn.preprocessing import OneHotEncoder`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      type: "Drop",
+      color: "#ea384c", // Red
+      title: "Drop Track_id and Unamed Columns",
+      code: `file = file.loc[:, ~file.columns.str.contains('^Unnamed')]`,
+      image: ["/lovable-uploads/before_drop.png", "/lovable-uploads/After_drop.png"]
     },
     {
       type: "Encode",
       color: "#33C3F0", // Blue
       title: "Label Encoding",
-      code: `# Encode categorical labels as integers\nfrom sklearn.preprocessing import LabelEncoder\nle = LabelEncoder()\ndf['encoded_col'] = le.fit_transform(df['category_col'])`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      code: `le = LabelEncoder()
+file['genre'] = le.fit_transform(file['genre'])
+file['artist_name'] = le.fit_transform(file['artist_name'])
+file['track_name'] = le.fit_transform(file['artist_name'])`,
+      image: ["/lovable-uploads/Before_encode.png", "/lovable-uploads/After_encode.png"]
     },
     {
-      type: "Drop",
-      color: "#ea384c", // Red
-      title: "Drop Duplicates",
-      code: `# Remove duplicate rows\ndf = df.drop_duplicates()\n# Based on specific columns\ndf = df.drop_duplicates(subset=['col1', 'col2'])`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      type: "Genre",
+      color: "#FFC0CB", // Pink
+      title: "Genre Impact",
+      code: `Most Impacting`,
+      image: ["/lovable-uploads/Genre.png", "/lovable-uploads/Genre_balanced.png", "/lovable-uploads/Genre2.png"]
     },
     {
-      type: "ADD",
+      type: "Catgorize",
+      color: "#33C3F0", // Blue
+      title: "Category Encoding",
+      code: `Encode categorical labels as integers`,
+      image: ["/lovable-uploads/Categories.png"]
+    },
+    {
+      type: "Result",
       color: "#5CD8B1", // Green
-      title: "Normalize Data",
-      code: `# Min-max scaling\nfrom sklearn.preprocessing import MinMaxScaler\nscaler = MinMaxScaler()\ndf[['feat1', 'feat2']] = scaler.fit_transform(df[['feat1', 'feat2']])`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      title: "Model Result",
+      code: `model.fit(X_train, y_train)`,
+      image: ["/lovable-uploads/1stPipe.png", "/lovable-uploads/BestRes.png", "/lovable-uploads/1res_met.png"]
     },
     {
-      type: "Drop",
-      color: "#ea384c", // Red
-      title: "Drop Outliers",
-      code: `# Remove outliers using IQR\nQ1 = df['column'].quantile(0.25)\nQ3 = df['column'].quantile(0.75)\nIQR = Q3 - Q1\ndf = df[(df['column'] >= Q1 - 1.5 * IQR) & (df['column'] <= Q3 + 1.5 * IQR)]`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
+      type: "Legend Parameter",
+      color: "#FFD700", // Gold
+      title: "Legend Parameter",
+      code: `weight = ((pr_train == 0).sum()/(pr_train == 1).sum())`,
+      image: ["/lovable-uploads/2nd.png", "/lovable-uploads/Unknown.png", "/lovable-uploads/Metrics.png"]
     },
     {
-      type: "Drop",
-      color: "#ea384c", // Red
-      title: "Drop Unnecessary Features",
-      code: `# Drop columns that are not needed\ndf = df.drop(['unused_column1', 'unused_column2'], axis=1)\n# Drop columns with high correlation\ncorr_matrix = df.corr().abs()\nhigh_corr_var = np.where(corr_matrix > 0.8)`,
-      image: ["/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png", "/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png"]
-    }
+      type: "Extra Result",
+      color: "#5CD8B1", // Green
+      title: "Model Result after changing the weight",
+      code: `model.fit(X_train, y_train)`,
+      image: ["/lovable-uploads/3rd.png", "/lovable-uploads/Class_0.png", "/lovable-uploads/class0_met.png"]
+    },
   ];
 
   return (
@@ -182,17 +185,17 @@ const DataPrepare = () => {
                         <pre className="text-white whitespace-pre-wrap">
                           {snippet.code.split('\n').map((line, i) => (
                             <div key={i} className="leading-relaxed">
-                              {/* Base16 Grayscale color scheme for Python syntax highlighting */}
-                              {line
-                                .replace(/(#.*)/g, '<span style="color: #888888">$1</span>') /* Comments */
-                                .replace(/\b(df|np|pd)\b/g, '<span style="color: #b8b8b8">$1</span>') /* Variables */
-                                .replace(/\b(from|import)\b/g, '<span style="color: #ab4642">$1</span>') /* Keywords */
-                                .replace(/\b(dropna|drop_duplicates|drop|corr|abs|quantile|fit_transform|log1p)\b/g, '<span style="color: #7cafc2">$1</span>') /* Functions */
-                                .replace(/\b(LabelEncoder|OneHotEncoder|MinMaxScaler|sklearn|preprocessing)\b/g, '<span style="color: #a1b56c">$1</span>') /* Classes */
-                                .replace(/'[^']*'|"[^"]*"/g, '<span style="color: #f7ca88">$&</span>') /* Strings */
-                                .replace(/\b(\d+(\.\d+)?)\b/g, '<span style="color: #dc9656">$1</span>') /* Numbers */
-                                .replace(/(\[|\])/g, '<span style="color: #ba8baf">$1</span>') /* Brackets */
-                              }
+                              {line}
+                              {/* {line
+                                .replace(/(#.*)/g, '<span style="color: #888888">$1</span>')
+                                .replace(/\b(df|np|pd)\b/g, '<span style="color: #b8b8b8">$1</span>') 
+                                .replace(/\b(from|import)\b/g, '<span style="color: #ab4642">$1</span>') 
+                                .replace(/\b(dropna|drop_duplicates|drop|corr|abs|quantile|fit_transform|log1p)\b/g, '<span style="color: #7cafc2">$1</span>') 
+                                .replace(/\b(LabelEncoder|OneHotEncoder|MinMaxScaler|sklearn|preprocessing)\b/g, '<span style="color: #a1b56c">$1</span>')
+                                .replace(/'[^']*'|"[^"]*"/g, '<span style="color: #f7ca88">$&</span>') 
+                                .replace(/\b(\d+(\.\d+)?)\b/g, '<span style="color: #dc9656">$1</span>') 
+                                .replace(/(\[|\])/g, '<span style="color: #ba8baf">$1</span>')
+                              } */}
                             </div>
                           ))}
                         </pre>

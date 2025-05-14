@@ -18,6 +18,12 @@ export default {
 			}
 		},
 		extend: {
+			backgroundImage: {
+        		'gradient-overlay': 'linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.2))',
+      		},
+			backdropBlur: {
+        		sm: '4px',
+      		},
 			fontFamily: {
 				'cyber': ['JetBrains Mono', 'monospace'],
 			},

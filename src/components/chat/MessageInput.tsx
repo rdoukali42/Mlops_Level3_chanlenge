@@ -19,7 +19,7 @@ const MessageInput = ({ inputMessage, setInputMessage, handleSendMessage, disabl
         onChange={(e) => setInputMessage(e.target.value)}
         placeholder="Type a message..."
         disabled={disabled}
-        className="flex-1 bg-transparent border-5CD8B1/50 text-white focus-visible:ring-5CD8B1/30 focus-visible:border-5CD8B1"
+        className="flex-1 bg-transparent border-5CD8B1/50 text-5CD8B1 focus-visible:ring-5CD8B1/30 focus-visible:border-5CD8B1"
       />
       
       <Button

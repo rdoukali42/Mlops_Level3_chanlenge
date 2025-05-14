@@ -1,6 +1,10 @@
 
 /* This file contains enhanced glitch effects for the LEVEL3 logo */
 
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
 .glitch-container {
   position: relative;
   display: inline-block;

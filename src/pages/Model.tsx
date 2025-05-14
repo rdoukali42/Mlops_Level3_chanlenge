@@ -7,19 +7,9 @@ import Form from '../components/Form';
 
 const Model = () => {
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden [perspective:1px]">
-  {/* Background Container */}
-  <div className="fixed inset-0 [transform:translateZ(-1px)_scale(2)] z-0">
-    <img 
-      src="/lovable-uploads/bg.jpg" 
-      className="w-full h-full object-cover"
-      alt="Background" 
-    />
-    {/* Dark overlay for readability */}
-    <div className="absolute inset-0 bg-black/50"></div>
-  </div>
-
-      {/* <GridBackground /> */}
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* <GridBackground />
+       */}
       
       <Navigation />
       

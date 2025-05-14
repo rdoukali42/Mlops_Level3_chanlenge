@@ -1,5 +1,9 @@
 
 /* This file contains enhanced glitch effects for the LEVEL3 logo */
+
+
+
+#n8n-chat {
 :root {
   /* Primary brand color */
   --chat--color-primary: #5CD8B1;
@@ -62,9 +66,6 @@
   --background-grid-gap: 50px;
   --background-grid-line-width: 1px;
 }
-
-
-#n8n-chat {
 	width: 60%;
 	height: 60%;
 }

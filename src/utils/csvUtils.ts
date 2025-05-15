@@ -30,7 +30,7 @@ export const useCsvData = () => {
   useEffect(() => {
     const fetchCsvData = async () => {
       try {
-        const response = await fetch('/row_100.csv');
+        const response = await fetch('/lovable-uploads/100_rows.csv');
         const csvText = await response.text();
         
         // Parse CSV

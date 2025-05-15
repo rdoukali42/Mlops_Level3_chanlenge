@@ -11,6 +11,9 @@ import Model from "./pages/Model";
 import Chat from "./pages/Chat";
 import ChatWithMe from "./pages/ChatWithMe";
 import NotFound from "./pages/NotFound";
+import MatrixRain from './components/background'; 
+
+
 
 const queryClient = new QueryClient();
 
@@ -20,13 +23,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ChatWithMe />
+        <div style={{ opacity: 0.3 }}>
+        <MatrixRain />
+        </div>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/data" element={<Data />} />
+          {/* <Route path="/data" element={<Data />} /> */}
           <Route path="/data_prepare" element={<DataPrepare />} />
           <Route path="/model" element={<Model />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/chat_with_me" element={<ChatWithMe />} />
+          {/* <Route path="/chat" element={<Chat />} /> */}
+          {/* <Route path="/chat_with_me" element={<ChatWithMe />} /> */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

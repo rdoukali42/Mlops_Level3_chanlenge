@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
+import "../glitch.css";
 
 const Level3Logo = () => {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -17,8 +18,8 @@ const Level3Logo = () => {
         if (index === 0) return; // Skip the main image
         
         // Create random shift values
-        const xShift = Math.random() * 6 - 3;
-        const yShift = Math.random() * 6 - 3;
+        const xShift = Math.random() * 10 - 3;
+        const yShift = Math.random() * 10 - 3;
         
         // Apply different shifts based on image layer
         if (index === 1) {
@@ -42,38 +43,38 @@ const Level3Logo = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="glitch-container my-8" ref={logoRef}>
+    <div className="flex flex-col items-center size-full">
+      <div className="glitch-container my-8 opacity-100 logo-rgb-shift" ref={logoRef}>
         <img 
-          src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
+          src="/lovable-uploads/level3_image.webp" 
           alt="LEVEL3" 
           className="glitch-image w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
+          src="/lovable-uploads/level3_image.webp" 
           alt="" 
           aria-hidden="true"
-          className="glitch-image-1 w-full max-w-[500px] h-auto"
+          className="glitch-image-1 w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
+          src="/lovable-uploads/level3_image.webp" 
           alt="" 
           aria-hidden="true"
-          className="glitch-image-2 w-full max-w-[500px] h-auto"
+          className="glitch-image-2 w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/42eb2bec-e3fe-462c-bff9-1183d6d0ef5f.png" 
+          src="/lovable-uploads/level3_image.webp" 
           alt="" 
           aria-hidden="true"
-          className="glitch-image-3 w-full max-w-[500px] h-auto"
+          className="glitch-image-3 w-full max-w-[500px] h-auto logo-rgb-shift"
         />
       </div>
-      <div className="mlops-caption glitch-container -mt-4">
+      {/* <div className="mlops-caption glitch-container -mt-4">
         <span className="glitch-image">MLOps</span>
         <span className="glitch-image-1">MLOps</span>
         <span className="glitch-image-2">MLOps</span>
         <span className="glitch-image-3">MLOps</span>
-      </div>
+      </div> */}
     </div>
   );
 };

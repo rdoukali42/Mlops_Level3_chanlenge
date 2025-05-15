@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../components/Navigation';
 import Level3Logo from '../components/Level3Logo';
+import BackgroundComponent from '../components/background'; 
 import GridBackground from '../components/GridBackground';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import '../App.css';
@@ -22,14 +23,14 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Custom Parallax Background */}
-      <div 
+      {/* <div 
         className="fixed inset-0 w-full h-full bg-cover bg-center z-0"
         style={{
-          backgroundImage: 'url("https://i.postimg.cc/BZXCxjdR/20250511-1339-3-D-Grid-Expansion-remix-01jtzj6zwkfmnsn748ercrmyng.png")',
+          backgroundImage: 'url("https://i.postimg.cc/BZXCxjdR/20250511-1339-3-D-Grid--remix-01jtzj6zwkfmnsn748ercrmyng.png")',
           transform: `translateY(${scrollY * 0.4}px)`,
           filter: 'brightness(0.95)',
         }}
-      />
+      /> */}
       
       {/* Darkened bottom edge for depth */}
       <div 
@@ -44,12 +45,69 @@ const Index = () => {
         <Navigation />
         
         <main className="flex-1 flex flex-col items-center pt-10 pb-32 px-6">
-          <div className="max-w-4xl w-full mx-auto">
+          <div className="max-w-4xl w-full mx-xl">
             <Level3Logo />
+
+            <div className="mx-auto bg-[var(--color-background)]/30 max-w-3xl md:p-8 md:space-y-6 p-4 rounded-xl space-y-4">
+  <div className="checkbox-item animate-fade-in">
+    <label className="flex items-center gap-2 md:gap-4">
+      <input
+        type="checkbox"
+        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 skill-checkbox"
+        defaultChecked
+      />
+      <span className="md:text-xl text-base">
+        comfortable in multiple programming languages?
+      </span>
+    </label>
+  </div>
+
+  <div className="checkbox-item animate-fade-in">
+    <label className="flex items-center gap-2 md:gap-4">
+      <input
+        type="checkbox"
+        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 skill-checkbox"
+        defaultChecked
+      />
+      <span className="md:text-xl text-base">
+        using the terminal without fear?
+      </span>
+    </label>
+  </div>
+
+  <div className="checkbox-item animate-fade-in">
+    <label className="flex items-center gap-2 md:gap-4">
+      <input
+        type="checkbox"
+        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 challenge-checkbox"
+        defaultChecked
+      />
+      <span className="md:text-xl text-base">looking for a challenge?</span>
+    </label>
+  </div>
+
+  <div className="checkbox-item animate-fade-in">
+    <label className="flex items-center gap-2 md:gap-4">
+      <input
+        type="checkbox"
+        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 expert-checkbox"
+      />
+      <span className="md:text-xl text-base">
+        an expert in{" "}
+        <span
+          className="font-bold text-[var(--color-primary)]"
+          id="track-title"
+          style={{ opacity: 1 }}
+        >
+          Build with LLMs?
+        </span>
+      </span>
+    </label>
+  </div>
+</div>
+
             
-            {/* Content Cards */}
-            <div className="mt-24 space-y-12 pb-20">
-              {/* Regression Methods Card */}
+            {/* <div className="mt-24 space-y-12 pb-20">
               <Card className="w-full backdrop-blur-sm bg-black/40 border border-5CD8B1/20 text-white shadow-lg transform hover:translate-y-[-5px] transition-transform duration-300" 
                     style={{ 
                       boxShadow: '0 10px 25px -5px rgba(92, 216, 177, 0.2)',
@@ -70,7 +128,6 @@ const Index = () => {
                 </CardContent>
               </Card>
               
-              {/* Classification & Language Modeling Card */}
               <Card className="w-full backdrop-blur-sm bg-black/40 border border-5CD8B1/20 text-white shadow-lg transform hover:translate-y-[-5px] transition-transform duration-300" 
                     style={{ 
                       boxShadow: '0 10px 25px -5px rgba(92, 216, 177, 0.2)',
@@ -90,7 +147,7 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
           </div>
         </main>
         

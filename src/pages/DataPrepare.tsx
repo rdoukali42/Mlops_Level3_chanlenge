@@ -60,13 +60,6 @@ const DataPrepare = () => {
     {
       type: "Drop",
       color: "#ea384c", // Red
-      title: "Drop Year 2023",
-      code: "file = file[file['year'] != 2023]",
-      image: ["/lovable-uploads/Year_curve.png", "/lovable-uploads/Year-Data-Count.png"]
-    },
-    {
-      type: "Drop",
-      color: "#ea384c", // Red
       title: "Drop Track_id and Unamed Columns",
       code: `file = file.loc[:, ~file.columns.str.contains('^Unnamed')]`,
       image: ["/lovable-uploads/before_drop.png", "/lovable-uploads/After_drop.png"]
@@ -80,6 +73,13 @@ file['genre'] = le.fit_transform(file['genre'])
 file['artist_name'] = le.fit_transform(file['artist_name'])
 file['track_name'] = le.fit_transform(file['artist_name'])`,
       image: ["/lovable-uploads/Before_encode.png", "/lovable-uploads/After_encode.png"]
+    },
+    {
+      type: "Drop",
+      color: "#ea384c", // Red
+      title: "Drop Year 2023",
+      code: "file = file[file['year'] != 2023]",
+      image: ["/lovable-uploads/Year_curve.png", "/lovable-uploads/Year-Data-Count.png"]
     },
     {
       type: "Genre",
@@ -121,14 +121,14 @@ file['track_name'] = le.fit_transform(file['artist_name'])`,
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Custom Parallax Background */}
-      <div 
+      {/* <div 
         className="fixed inset-0 w-full h-full bg-cover bg-center z-0"
         style={{
           backgroundImage: 'url("/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png")',
           transform: `translateY(${scrollY * 0.4}px)`,
           filter: 'brightness(0.95)',
         }}
-      />
+      /> */}
       
       {/* Darkened bottom edge for depth */}
       <div 
@@ -214,8 +214,8 @@ file['track_name'] = le.fit_transform(file['artist_name'])`,
                   
                   {/* Inline Image Viewer - Updated for better image display */}
                   {activeSnippet === index && (
-                    <div className="mt-2 relative bg-black/80 backdrop-blur-md border border-white/10 rounded-lg p-4 transition-all duration-300 flex flex-col">
-                      <div className="flex justify-between items-center mb-3">
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                      <div className="flex justify-between items-center mb-2">
                         <h4 className="text-lg font-bold">{snippet.title} - Full Example</h4>
                         <Button 
                           variant="ghost" 
@@ -229,7 +229,7 @@ file['track_name'] = le.fit_transform(file['artist_name'])`,
                       
                       <div className="relative snippet-image-container">
                         {/* Image container with updated styling for original size display */}
-                        <div className="relative overflow-auto max-h-[80vh] rounded-md">
+                        <div className="relative overflow-auto max-h-[80vh] max-w-screen overflow-x-auto rounded-md">
                           {Array.isArray(snippet.image) && snippet.image.length > 0 && (
                             <img 
                               src={snippet.image[currentImageIndex]} 

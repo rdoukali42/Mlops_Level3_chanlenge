@@ -1,10 +1,10 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCsvData, MusicDataRow } from "@/utils/csvUtils";
 import { toast } from "@/hooks/use-toast";
+import { LabelEncoder } from '@/utils/labelEncoder'; // Import a utility for label encoding
 
 const FILE_API_ENDPOINT = "http://localhost:5002/invocations";
 const FETCH_TIMEOUT = 300000; // 5 minutes in milliseconds
@@ -38,6 +38,8 @@ const fieldTypes = {
   duration_ms: "int",
   time_signature: "int",
 };
+
+const labelEncoder = new LabelEncoder(); // Initialize the label encoder
 
 export default function MusicDataForm() {
   const [formData, setFormData] = useState<MusicDataRow>({} as MusicDataRow);
@@ -96,10 +98,16 @@ export default function MusicDataForm() {
 
   const handleSubmit = async () => {
     const dataRow = fields.map((field) => {
-      const value = formData[field];
+      let value = formData[field];
       const type = fieldTypes[field as keyof typeof fieldTypes];
-      if (type === "int") return parseInt(value);
-      if (type === "float") return parseFloat(value);
+
+      // Apply label encoding for specific fields if they are integers
+      if (['artist_name', 'track_name', 'genre'].includes(field)) {
+        value = labelEncoder.encode(value);
+      }
+
+      if (type === 'int') return parseInt(value);
+      if (type === 'float') return parseFloat(value);
       return value;
     });
 
@@ -178,7 +186,7 @@ export default function MusicDataForm() {
           <div className="flex gap-4 mb-4">
             <Button 
               onClick={handleAutoFill}
-              className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
+              className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
             >
               AutoFill
             </Button>
@@ -194,7 +202,7 @@ export default function MusicDataForm() {
               />
               <Button 
                 onClick={handleFillByIndex}
-                className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
+                className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
               >
                 FillByIndex
               </Button>
@@ -212,7 +220,7 @@ export default function MusicDataForm() {
           ))}
           <Button 
             onClick={handleSubmit}
-            className="bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
+            className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
           >
             Submit
           </Button>

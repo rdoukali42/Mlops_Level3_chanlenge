@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { useCsvData } from "@/utils/csvUtils";
+import { useCsvData, MusicDataRow } from "@/utils/csvUtils";
 import { toast } from "@/hooks/use-toast";
 
 const FILE_API_ENDPOINT = "http://localhost:5002/invocations";
@@ -40,7 +40,7 @@ const fieldTypes = {
 };
 
 export default function MusicDataForm() {
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [formData, setFormData] = useState<MusicDataRow>({} as MusicDataRow);
   const [jsonOutput, setJsonOutput] = useState(null);
   const [resultMessage, setResultMessage] = useState("");
   const [rowIndex, setRowIndex] = useState<string>("");
@@ -52,7 +52,7 @@ export default function MusicDataForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const fillFormWithData = (data: Record<string, string> | null) => {
+  const fillFormWithData = (data: MusicDataRow | null) => {
     if (!data) {
       toast({
         title: "Error",

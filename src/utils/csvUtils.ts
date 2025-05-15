@@ -19,6 +19,7 @@ export interface MusicDataRow {
   tempo: string;
   duration_ms: string;
   time_signature: string;
+  [key: string]: string; // Add index signature to allow string indexing
 }
 
 export const useCsvData = () => {
@@ -38,13 +39,13 @@ export const useCsvData = () => {
         
         const parsedData = rows.slice(1).map(row => {
           const values = row.split(',');
-          const rowData: Record<string, string> = {};
+          const rowData = {} as MusicDataRow;
           
           headers.forEach((header, index) => {
             rowData[header.trim()] = values[index]?.trim() || '';
           });
           
-          return rowData as MusicDataRow;
+          return rowData;
         }).filter(row => Object.values(row).some(value => value !== ''));
         
         setCsvData(parsedData);

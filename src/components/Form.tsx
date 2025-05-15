@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -5,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useCsvData, MusicDataRow } from "@/utils/csvUtils";
 import { toast } from "@/hooks/use-toast";
 import { LabelEncoder } from '@/utils/labelEncoder'; // Import a utility for label encoding
+import { MessageSquare } from "lucide-react"; // Import the chat icon
 
 const FILE_API_ENDPOINT = "http://localhost:5002/invocations";
 const FETCH_TIMEOUT = 300000; // 5 minutes in milliseconds
@@ -96,7 +98,7 @@ export default function MusicDataForm() {
     fillFormWithData(rowData);
   };
 
-  const handleSubmit = async () => {
+  const prepareSubmitData = () => {
     const dataRow = fields.map((field) => {
       let value = formData[field];
       const type = fieldTypes[field as keyof typeof fieldTypes];
@@ -111,14 +113,17 @@ export default function MusicDataForm() {
       return value;
     });
 
-    const result = {
+    return {
       dataframe_split: {
         index: [1],
         columns: fields,
         data: [dataRow]
       }
     };
+  };
 
+  const handleSubmit = async () => {
+    const result = prepareSubmitData();
     setJsonOutput(result);
     console.log(JSON.stringify(result));
 
@@ -152,6 +157,59 @@ export default function MusicDataForm() {
       }
       console.error('Network or unexpected error in sendChatMessage:', error);
       return { status: 'error', message: error instanceof Error ? error.message : 'An unknown error occurred.', userMessage: result };
+    }
+  };
+
+  const handleSubmitToChat = () => {
+    const result = prepareSubmitData();
+    
+    // Create a formatted message with the JSON data
+    const message = `Form Submission Data:\n\`\`\`json\n${JSON.stringify(result, null, 2)}\n\`\`\``;
+    
+    // Find the n8n chat element and click it if it's not open
+    const chatElements = document.querySelectorAll('.n8n-chat-widget-trigger');
+    if (chatElements.length > 0) {
+      // Check if the chat is already open
+      const isChatOpen = document.querySelector('.n8n-chat-window');
+      if (!isChatOpen) {
+        (chatElements[0] as HTMLElement).click();
+      }
+      
+      // Wait for the chat window to be ready
+      setTimeout(() => {
+        // Find the input field in the chat window
+        const inputElement = document.querySelector('.n8n-chat-window input[type="text"]') as HTMLInputElement;
+        const sendButton = document.querySelector('.n8n-chat-window button[type="submit"]') as HTMLButtonElement;
+        
+        if (inputElement && sendButton) {
+          // Set the input value to our message
+          inputElement.value = message;
+          
+          // Create an input event to trigger any listeners
+          const event = new Event('input', { bubbles: true });
+          inputElement.dispatchEvent(event);
+          
+          // Submit the form
+          sendButton.click();
+          
+          toast({
+            title: "Sent to Chat",
+            description: "Form data has been sent to the chat window",
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: "Could not find chat input field",
+            variant: "destructive",
+          });
+        }
+      }, 1000); // Give the chat a second to initialize
+    } else {
+      toast({
+        title: "Error",
+        description: "Chat widget not found on the page",
+        variant: "destructive",
+      });
     }
   };
 
@@ -218,12 +276,23 @@ export default function MusicDataForm() {
               onChange={handleChange}
             />
           ))}
-          <Button 
-            onClick={handleSubmit}
-            className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
-          >
-            Submit
-          </Button>
+          
+          <div className="flex gap-4">
+            <Button 
+              onClick={handleSubmit}
+              className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
+            >
+              Submit
+            </Button>
+            <Button 
+              onClick={handleSubmitToChat}
+              className="bg-[#5CD8B1] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90"
+              title="Send to Chat"
+            >
+              <MessageSquare className="mr-2 h-4 w-4" />
+              SubmitToChat
+            </Button>
+          </div>
         </CardContent>
       </Card>
       {resultMessage && (

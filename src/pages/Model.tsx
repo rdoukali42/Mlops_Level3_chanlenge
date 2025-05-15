@@ -8,8 +8,7 @@ import Form from '../components/Form';
 const Model = () => {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* <GridBackground />
-       */}
+      <GridBackground />
       
       <Navigation />
       

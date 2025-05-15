@@ -5,7 +5,7 @@ import '../chat.css';
 import { createChat } from '@n8n/chat';
 import { toast } from '@/components/ui/sonner';
 
-const ChatWithMe = () => {
+const ChatWithMe = ({message}) => {
   useEffect(() => {
     try {
       createChat({

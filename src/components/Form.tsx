@@ -11,6 +11,8 @@ import { MessageSquare } from "lucide-react"; // Import the chat icon
 const FILE_API_ENDPOINT = "http://localhost:5002/invocations";
 const FETCH_TIMEOUT = 300000; // 5 minutes in milliseconds
 
+
+
 const controller = new AbortController();
 const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
@@ -22,10 +24,10 @@ const fields = [
 ];
 
 const fieldTypes = {
-  artist_name: "float",
-  track_name: "float",
+  artist_name: "string",
+  track_name: "string",
   year: "float",
-  genre: "int",
+  genre: "string",
   danceability: "float",
   energy: "float",
   key: "float",
@@ -94,7 +96,6 @@ export default function MusicDataForm() {
       });
       return;
     }
-    
     fillFormWithData(rowData);
   };
 
@@ -104,11 +105,11 @@ export default function MusicDataForm() {
       const type = fieldTypes[field as keyof typeof fieldTypes];
 
       // Apply label encoding for specific fields
-      if (['artist_name', 'track_name', 'genre'].includes(field)) {
-        // Always convert value to string before encoding
-        const stringValue = String(value || '');
-        value = labelEncoder.encode(stringValue);
-      }
+    //   if (['artist_name', 'track_name', 'genre'].includes(field)) {
+    //     // Always convert value to string before encoding
+    //     const stringValue = String(value || '');
+    //     value = labelEncoder.encode(stringValue);
+    //   }
 
       // Convert to the proper type for the API request
       if (type === 'int') return parseInt(String(value));
@@ -149,7 +150,8 @@ export default function MusicDataForm() {
       }
       
       const data = await response.json();
-      const prediction = data.predictions;
+      console.log("API Response:", data)
+      const prediction = data.prediction[0];
       setResultMessage(prediction === 1 ? "Popular" : "Unpopular");
 
     } catch (error: any) {
@@ -164,57 +166,33 @@ export default function MusicDataForm() {
   };
 
   const handleSubmitToChat = () => {
-    const result = prepareSubmitData();
-    
-    // Create a formatted message with the JSON data
-    const message = `Form Submission Data:\n\`\`\`json\n${JSON.stringify(result, null, 2)}\n\`\`\``;
-    
-    // Find the n8n chat element and click it if it's not open
-    const chatElements = document.querySelectorAll('.n8n-chat-widget-trigger');
-    if (chatElements.length > 0) {
-      // Check if the chat is already open
-      const isChatOpen = document.querySelector('.n8n-chat-window');
-      if (!isChatOpen) {
-        (chatElements[0] as HTMLElement).click();
-      }
-      
-      // Wait for the chat window to be ready
-      setTimeout(() => {
-        // Find the input field in the chat window
-        const inputElement = document.querySelector('.n8n-chat-window input[type="text"]') as HTMLInputElement;
-        const sendButton = document.querySelector('.n8n-chat-window button[type="submit"]') as HTMLButtonElement;
-        
-        if (inputElement && sendButton) {
-          // Set the input value to our message
-          inputElement.value = message;
-          
-          // Create an input event to trigger any listeners
-          const event = new Event('input', { bubbles: true });
-          inputElement.dispatchEvent(event);
-          
-          // Submit the form
-          sendButton.click();
-          
-          toast({
-            title: "Sent to Chat",
-            description: "Form data has been sent to the chat window",
-          });
-        } else {
-          toast({
-            title: "Error",
-            description: "Could not find chat input field",
-            variant: "destructive",
-          });
-        }
-      }, 1000); // Give the chat a second to initialize
-    } else {
-      toast({
-        title: "Error",
-        description: "Chat widget not found on the page",
-        variant: "destructive",
+  const result = prepareSubmitData();
+  const jsonString = JSON.stringify(result, null, 2);
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(jsonString)
+      .then(() => {
+        toast({
+          title: "Copied to Clipboard",
+          description: "Form data JSON has been copied successfully.",
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Error",
+          description: "Failed to copy data to clipboard.",
+          variant: "destructive",
+        });
       });
-    }
-  };
+  } else {
+    toast({
+      title: "Error",
+      description: "Clipboard API not supported in this browser.",
+      variant: "destructive",
+    });
+  }
+};
+
 
   if (loading) {
     return (
@@ -293,7 +271,7 @@ export default function MusicDataForm() {
               title="Send to Chat"
             >
               <MessageSquare className="mr-2 h-4 w-4" />
-              SubmitToChat
+              Copy
             </Button>
           </div>
         </CardContent>

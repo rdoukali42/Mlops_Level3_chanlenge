@@ -30,7 +30,7 @@ export const useCsvData = () => {
   useEffect(() => {
     const fetchCsvData = async () => {
       try {
-        const response = await fetch('/lovable-uploads/100_rows.csv');
+        const response = await fetch('/lovable-uploads/spotify_data.csv');
         const csvText = await response.text();
         
         // Parse CSV

@@ -53,11 +53,11 @@ const Index = () => {
     <label className="flex items-center gap-2 md:gap-4">
       <input
         type="checkbox"
-        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 skill-checkbox"
+        className="accent-[#5CD8B1] h-6 min-w-[24px] w-6 skill-checkbox"
         defaultChecked
       />
       <span className="md:text-xl text-base">
-        comfortable in multiple programming languages?
+        Regression Tasks and Experiment Tracking
       </span>
     </label>
   </div>
@@ -66,23 +66,12 @@ const Index = () => {
     <label className="flex items-center gap-2 md:gap-4">
       <input
         type="checkbox"
-        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 skill-checkbox"
+        className="accent-[#5CD8B1] h-6 min-w-[24px] w-6 skill-checkbox"
         defaultChecked
       />
       <span className="md:text-xl text-base">
-        using the terminal without fear?
+        Classification Models and Deployment
       </span>
-    </label>
-  </div>
-
-  <div className="checkbox-item animate-fade-in">
-    <label className="flex items-center gap-2 md:gap-4">
-      <input
-        type="checkbox"
-        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 challenge-checkbox"
-        defaultChecked
-      />
-      <span className="md:text-xl text-base">looking for a challenge?</span>
     </label>
   </div>
 
@@ -92,14 +81,24 @@ const Index = () => {
         type="checkbox"
         className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 expert-checkbox"
       />
+      <span className="md:text-xl text-base">Pipeline Orchestration and Workflow Automation</span>
+    </label>
+  </div>
+
+  <div className="checkbox-item animate-fade-in">
+    <label className="flex items-center gap-2 md:gap-4">
+     <input
+        type="checkbox"
+        className="accent-[var(--color-primary)] h-6 min-w-[24px] w-6 expert-checkbox"
+      />
       <span className="md:text-xl text-base">
-        an expert in{" "}
+        {" "}
         <span
           className="font-bold text-[var(--color-primary)]"
           id="track-title"
           style={{ opacity: 1 }}
         >
-          Build with LLMs?
+          Ready for <span className="font-bold text-[#5CD8B1]">More?</span>
         </span>
       </span>
     </label>

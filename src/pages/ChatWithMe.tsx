@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import '@n8n/chat/style.css';
 import '../chat.css';
@@ -15,14 +16,15 @@ const ChatWithMe = () => {
           'How can I assist you today?'
         ],
         i18n: {
-		  en: {
-			title: 'Hi there! 👋',
-			subtitle: "",
-			footer: '',
-			getStarted: 'New Conversation',
-			inputPlaceholder: 'Type your question..',
-		},
-	},
+          en: {
+            title: 'Hi there! 👋',
+            subtitle: "",
+            footer: '',
+            getStarted: 'New Conversation',
+            inputPlaceholder: 'Type your question..',
+            closeButtonTooltip: 'Close Chat',
+          },
+        },
       });
     } catch (error) {
       console.error("Failed to initialize chat:", error);

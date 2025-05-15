@@ -108,8 +108,9 @@ export default function MusicDataForm() {
         value = labelEncoder.encode(value);
       }
 
-      if (type === 'int') return parseInt(value);
-      if (type === 'float') return parseFloat(value);
+      // Convert to the proper type but ensure it remains a string in formData
+      if (type === 'int') return parseInt(String(value));
+      if (type === 'float') return parseFloat(String(value));
       return value;
     });
 

@@ -1,50 +1,96 @@
+
 import React, { useEffect, useRef } from 'react';
 
+// Define proper interfaces for the Vector and Particle classes
+interface VectorType {
+  x: number;
+  y: number;
+  set: (x: number, y: number) => VectorType;
+  add: (v: VectorType) => VectorType;
+  mult: (n: number) => VectorType;
+  setMag: (n: number) => VectorType;
+  sub: (v: VectorType) => VectorType;
+  magSq: () => number;
+  clone: () => VectorType;
+}
+
+interface ParticleType {
+  state: string;
+  createdAt: number;
+  pos: VectorType;
+  vel: VectorType;
+  isClone: boolean;
+  offset?: number;
+  char?: string;
+  pickChar: () => void;
+  reset: () => void;
+  clone: () => void;
+  remove: () => void;
+}
+
 const MatrixRain = () => {
-  const canvasRef = useRef(null);
-  const particleList = [];
-  const columns = [];
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particleList: ParticleType[] = [];
+  const columns: number[] = [];
   const w = 12;
   const h = w * 2;
   let lastUpdateAt = -1000;
-  let animationFrame;
+  let animationFrame: number;
 
-  class Vector {
+  class Vector implements VectorType {
+    x: number;
+    y: number;
+    
     constructor(x = 0, y = 0) {
       this.x = x;
       this.y = y;
     }
-    set(x, y) {
+    
+    set(x: number, y: number) {
       this.x = x;
       this.y = y;
       return this;
     }
-    add(v) {
+    
+    add(v: VectorType) {
       this.x += v.x;
       this.y += v.y;
       return this;
     }
-    mult(n) {
+    
+    mult(n: number) {
       this.x *= n;
       this.y *= n;
       return this;
     }
-    setMag(n) {
+    
+    setMag(n: number) {
       const mag = Math.sqrt(this.x * this.x + this.y * this.y) || 1;
       return this.set((this.x / mag) * n, (this.y / mag) * n);
     }
-    sub(v) {
+    
+    sub(v: VectorType) {
       return new Vector(this.x - v.x, this.y - v.y);
     }
+    
     magSq() {
       return this.x * this.x + this.y * this.y;
     }
+    
     clone() {
       return new Vector(this.x, this.y);
     }
   }
 
-  class Particle {
+  class Particle implements ParticleType {
+    state: string;
+    createdAt: number;
+    pos: VectorType;
+    vel: VectorType;
+    isClone: boolean;
+    offset?: number;
+    char?: string;
+    
     constructor(isClone = false) {
       this.state = 'good';
       this.createdAt = performance.now();
@@ -54,6 +100,7 @@ const MatrixRain = () => {
       this.pickChar();
       if (!this.isClone) this.reset();
     }
+    
     reset() {
       const now = performance.now();
       const xCount = Math.ceil(window.innerWidth / w);
@@ -69,6 +116,7 @@ const MatrixRain = () => {
       this.pos = new Vector(x, -w);
       this.vel.set(0, 0);
     }
+    
     pickChar() {
       if (this.isClone && Math.random() < 0.9) return;
       const offsetGroup = [
@@ -79,6 +127,7 @@ const MatrixRain = () => {
       this.offset = Math.floor(Math.random() * (offsetGroup[1] - offsetGroup[0])) + offsetGroup[0];
       this.char = String.fromCodePoint(this.offset);
     }
+    
     clone() {
       if (!this.isClone) {
         const p = new Particle(true);
@@ -89,6 +138,7 @@ const MatrixRain = () => {
         this.remove();
       }
     }
+    
     remove() {
       const index = particleList.indexOf(this);
       if (index !== -1) particleList.splice(index, 1);
@@ -145,4 +195,3 @@ const MatrixRain = () => {
 };
 
 export default MatrixRain;
-

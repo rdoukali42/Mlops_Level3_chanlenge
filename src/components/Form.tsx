@@ -105,7 +105,9 @@ export default function MusicDataForm() {
 
       // Apply label encoding for specific fields
       if (['artist_name', 'track_name', 'genre'].includes(field)) {
-        value = labelEncoder.encode(String(value)); // Ensure value is a string before encoding
+        // Always convert value to string before encoding
+        const stringValue = String(value || '');
+        value = labelEncoder.encode(stringValue);
       }
 
       // Convert to the proper type for the API request

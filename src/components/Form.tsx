@@ -103,12 +103,12 @@ export default function MusicDataForm() {
       let value = formData[field];
       const type = fieldTypes[field as keyof typeof fieldTypes];
 
-      // Apply label encoding for specific fields if they are integers
+      // Apply label encoding for specific fields
       if (['artist_name', 'track_name', 'genre'].includes(field)) {
-        value = labelEncoder.encode(value);
+        value = labelEncoder.encode(String(value)); // Ensure value is a string before encoding
       }
 
-      // Convert to the proper type but ensure it remains a string in formData
+      // Convert to the proper type for the API request
       if (type === 'int') return parseInt(String(value));
       if (type === 'float') return parseFloat(String(value));
       return value;

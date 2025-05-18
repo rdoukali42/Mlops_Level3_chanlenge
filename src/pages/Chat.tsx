@@ -21,7 +21,7 @@ const Chat = () => {
       
       <footer className="mt-auto py-6 text-5CD8B1/60 text-sm">
         <div className="container">
-          © {new Date().getFullYear()} LEVEL3. All rights reserved.
+          © {new Date().getFullYear()} @Arkadia LEVEL3. All rights reserved.
         </div>
       </footer>
     </div>

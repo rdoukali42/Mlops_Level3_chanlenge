@@ -77,7 +77,7 @@ export default function MusicDataForm() {
   };
 
   const handleFillByIndex = () => {
-    const index = parseInt(rowIndex, 10);
+    const index = parseInt(rowIndex, 10) - 584002;
     if (isNaN(index)) {
       toast({
         title: "Invalid Index",
@@ -150,7 +150,7 @@ export default function MusicDataForm() {
       }
       
       const data = await response.json();
-      console.log("API Response:", data)
+      console.log("API Response:", data.prediction[0]);
       const prediction = data.prediction[0];
       setResultMessage(prediction === 1 ? "Popular" : "Unpopular");
 
@@ -234,7 +234,7 @@ export default function MusicDataForm() {
                 type="number"
                 min="0"
                 max="99"
-                placeholder="Row Index (0-99)"
+                placeholder="Row Index (From  584002)"
                 value={rowIndex}
                 onChange={(e) => setRowIndex(e.target.value)}
                 className="flex-1"

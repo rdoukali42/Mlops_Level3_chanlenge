@@ -1,73 +1,158 @@
-# Welcome to your Lovable project
+# Spotify Music Popularity Prediction
 
-## Project info
+A comprehensive machine learning web application that predicts music popularity using Spotify dataset features. This project combines data science, machine learning, and modern web development to create an interactive platform for music popularity analysis.
 
-**URL**: https://lovable.dev/projects/a0d4226e-7a9c-4804-8559-f88673d6404e
+## 🎵 Project Overview
 
-## How can I edit this code?
+This application analyzes over 584,000 Spotify tracks to predict whether a song will be popular or unpopular based on various musical features. The project showcases the complete machine learning pipeline from data preprocessing to model deployment and interactive prediction.
 
-There are several ways of editing your application.
+## 🚀 Features
 
-**Use Lovable**
+### Data Analysis & Visualization
+- **Interactive Data Preparation**: Visualize data cleaning steps including label encoding, column dropping, and categorical data handling
+- **Feature Engineering**: Transform raw music data into ML-ready formats
+- **Statistical Analysis**: Explore relationships between musical features and popularity
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a0d4226e-7a9c-4804-8559-f88673d6404e) and start prompting.
+### Machine Learning Model
+- **Binary Classification**: Predicts song popularity (Popular/Unpopular)
+- **17 Feature Model**: Uses comprehensive audio features for prediction
+- **Real-time Predictions**: Instant results through REST API integration
 
-Changes made via Lovable will be committed automatically to this repo.
+### Interactive Interface
+- **Prediction Form**: Input song features and get instant popularity predictions
+- **Auto-fill Options**: Load random samples from the dataset for testing
+- **Data Exploration**: Browse through dataset samples with index-based selection
+- **Chat Interface**: Discuss analysis and results with an integrated chat system
 
-**Use your preferred IDE**
+## 🎼 Musical Features Used
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+The model analyzes these Spotify audio features:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+**Basic Info:**
+- Artist name, Track name, Year, Genre
 
-Follow these steps:
+**Audio Features:**
+- **Danceability**: How suitable for dancing (0.0 to 1.0)
+- **Energy**: Intensity and power (0.0 to 1.0) 
+- **Valence**: Musical positiveness (0.0 to 1.0)
+- **Tempo**: Beats per minute
+- **Loudness**: Overall loudness in decibels
+- **Speechiness**: Presence of spoken words
+- **Acousticness**: Acoustic vs electric sound
+- **Instrumentalness**: Vocal content prediction
+- **Liveness**: Live audience presence
+- **Key**: Musical key (0-11)
+- **Mode**: Major (1) or minor (0)
+- **Duration**: Track length in milliseconds
+- **Time Signature**: Beat grouping (3-7)
+
+## 🛠️ Technology Stack
+
+**Frontend:**
+- **React 18** with TypeScript for type-safe development
+- **Vite** for fast development and optimized builds
+- **Tailwind CSS** for responsive, utility-first styling
+- **shadcn/ui** for modern, accessible UI components
+- **Radix UI** primitives for robust component foundation
+
+**Backend Integration:**
+- **REST API** integration for ML model predictions
+- **CSV Data Processing** for dataset management
+- **Label Encoding** utilities for categorical data
+
+**Development Tools:**
+- **ESLint** for code quality
+- **TypeScript** for static type checking
+- **Bun/npm** for package management
+
+## 🔧 Setup & Installation
+
+### Prerequisites
+- Node.js 16+ or Bun
+- Python ML model server (runs on localhost:5002)
+
+### Installation Steps
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone the repository
+git clone <repository-url>
+cd level3_mlops
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
+# or
+bun install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
+# or
+bun dev
 ```
 
-**Edit a file directly in GitHub**
+### ML Model Setup
+Ensure your machine learning model server is running on `localhost:5002` with the `/invocations` endpoint for predictions.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📊 Dataset Information
 
-**Use GitHub Codespaces**
+- **Size**: 584,002+ Spotify tracks
+- **Format**: CSV with 17 feature columns
+- **Source**: Spotify Web API audio features
+- **Timeframe**: Multi-year dataset excluding 2023 data
+- **Target**: Binary classification (Popular/Unpopular)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🎯 Model Performance
 
-## What technologies are used for this project?
+The application showcases various model metrics and performance visualizations:
+- Confusion matrices for classification results
+- Feature importance analysis
+- Class balance handling with weighted training
+- Performance metrics before and after parameter tuning
 
-This project is built with:
+## 🌐 Usage
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. **Explore Data**: Navigate to the Data Preparation section to understand the preprocessing pipeline
+2. **Make Predictions**: Use the prediction form to input song features and get popularity predictions
+3. **Test with Samples**: Use AutoFill to load random songs from the dataset
+4. **Analyze Results**: Review prediction confidence and model explanations
+5. **Chat Interface**: Discuss findings and ask questions about the analysis
 
-## How can I deploy this project?
+## 📁 Project Structure
 
-Simply open [Lovable](https://lovable.dev/projects/a0d4226e-7a9c-4804-8559-f88673d6404e) and click on Share -> Publish.
+```
+src/
+├── components/          # React components
+│   ├── Form.tsx        # Prediction input form
+│   ├── ChatInterface.tsx # Chat functionality
+│   └── ui/             # UI component library
+├── pages/              # Application pages
+│   ├── Index.tsx       # Landing page
+│   ├── DataPrepare.tsx # Data preprocessing visualization
+│   ├── Data.tsx        # Dataset exploration
+│   └── Model.tsx       # Model performance
+├── utils/              # Utility functions
+│   ├── csvUtils.ts     # CSV data processing
+│   └── labelEncoder.ts # Categorical encoding
+└── hooks/              # Custom React hooks
+```
 
-## Can I connect a custom domain to my Lovable project?
+## 🔮 Future Enhancements
 
-Yes, you can!
+- Real-time Spotify API integration
+- Advanced feature engineering
+- Model ensemble techniques
+- User playlist analysis
+- Music recommendation system
+- A/B testing framework for model improvements
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📈 Contributing
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project demonstrates modern MLOps practices and full-stack development. Contributions are welcome for:
+- Model improvements and new algorithms
+- UI/UX enhancements
+- Additional data sources
+- Performance optimizations
+- Documentation improvements
+
+---
+
+Built with ❤️ for music lovers and data scientists

@@ -62,7 +62,7 @@ const DataPrepare = () => {
       color: "#ea384c", // Red
       title: "Drop Track_id and Unamed Columns",
       code: `file = file.loc[:, ~file.columns.str.contains('^Unnamed')]`,
-      image: ["/lovable-uploads/before_drop.png", "/lovable-uploads/After_drop.png"]
+      image: ["/images/before_drop.png", "/images/After_drop.png"]
     },
     {
       type: "Encode",
@@ -72,49 +72,49 @@ const DataPrepare = () => {
 file['genre'] = le.fit_transform(file['genre'])
 file['artist_name'] = le.fit_transform(file['artist_name'])
 file['track_name'] = le.fit_transform(file['artist_name'])`,
-      image: ["/lovable-uploads/Before_encode.png", "/lovable-uploads/After_encode.png"]
+      image: ["/images/Before_encode.png", "/images/After_encode.png"]
     },
     {
       type: "Drop",
       color: "#ea384c", // Red
       title: "Drop Year 2023",
       code: "file = file[file['year'] != 2023]",
-      image: ["/lovable-uploads/Year_curve.png", "/lovable-uploads/Year-Data-Count.png"]
+      image: ["/images/Year_curve.png", "/images/Year-Data-Count.png"]
     },
     {
       type: "Genre",
       color: "#FFC0CB", // Pink
       title: "Genre Impact",
       code: `Most Impacting`,
-      image: ["/lovable-uploads/Genre.png", "/lovable-uploads/Genre_balanced.png", "/lovable-uploads/Genre2.png"]
+      image: ["/images/Genre.png", "/images/Genre_balanced.png", "/images/Genre2.png"]
     },
     {
       type: "Catgorize",
       color: "#33C3F0", // Blue
       title: "Category Encoding",
       code: `Encode categorical labels as integers`,
-      image: ["/lovable-uploads/Categories.png"]
+      image: ["/images/Categories.png"]
     },
     {
       type: "Result",
       color: "#5CD8B1", // Green
       title: "Model Result",
       code: `model.fit(X_train, y_train)`,
-      image: ["/lovable-uploads/1stPipe.png", "/lovable-uploads/BestRes.png", "/lovable-uploads/1res_met.png"]
+      image: ["/images/1stPipe.png", "/images/BestRes.png", "/images/1res_met.png"]
     },
     {
       type: "Legend Parameter",
       color: "#FFD700", // Gold
       title: "Legend Parameter",
       code: `weight = ((pr_train == 0).sum()/(pr_train == 1).sum())`,
-      image: ["/lovable-uploads/2nd.png", "/lovable-uploads/Unknown.png", "/lovable-uploads/Metrics.png"]
+      image: ["/images/2nd.png", "/images/Unknown.png", "/images/Metrics.png"]
     },
     {
       type: "Extra Result",
       color: "#5CD8B1", // Green
       title: "Model Result after changing the weight",
       code: `model.fit(X_train, y_train)`,
-      image: ["/lovable-uploads/3rd.png", "/lovable-uploads/Class_0.png", "/lovable-uploads/class0_met.png"]
+      image: ["/images/3rd.png", "/images/Class_0.png", "/images/class0_met.png"]
     },
   ];
 
@@ -124,7 +124,7 @@ file['track_name'] = le.fit_transform(file['artist_name'])`,
       {/* <div 
         className="fixed inset-0 w-full h-full bg-cover bg-center z-0"
         style={{
-          backgroundImage: 'url("/lovable-uploads/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png")',
+          backgroundImage: 'url("/images/6b52ffb9-d78f-4eb8-9ecb-4544f135ba94.png")',
           transform: `translateY(${scrollY * 0.4}px)`,
           filter: 'brightness(0.95)',
         }}

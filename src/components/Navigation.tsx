@@ -11,7 +11,7 @@ const Navigation = () => {
       <div className="flex items-center">
         <Link to="/" className="flex items-center">
           <img 
-            src="/lovable-uploads/level3_logo.webp" 
+            src="/images/level3_logo.png" 
             alt="LEVEL3" 
             className="h-10 mr-2" 
           />

@@ -18,7 +18,7 @@ const Background3D: React.FC = () => {
 
     // Load the background image
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/lovable-uploads/bg.jpg'); // Replace with your image path
+    const texture = textureLoader.load('/images/bg.jpg'); // Replace with your image path
     const material = new THREE.MeshBasicMaterial({ map: texture });
 
     // Add a plane for the background

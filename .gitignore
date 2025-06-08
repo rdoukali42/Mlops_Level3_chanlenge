@@ -22,4 +22,39 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-public/lovable-uploads/spotify_data.csv
+
+# Environment variables and secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Sensitive configuration files
+supabase/config.toml
+src/integrations/supabase/client.ts
+src/components/chat/apiService.ts
+
+# Deployment scripts with sensitive data
+deploy.sh
+deploy-to-firebase.sh
+update.sh
+setup-gcloud.sh
+
+# Firebase and Google Cloud configs
+firebase.json
+app.yaml
+
+# Lock files (can be regenerated)
+package-lock.json
+bun.lockb
+yarn.lock
+
+# Temporary and build files
+public/lovable-uploads/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup

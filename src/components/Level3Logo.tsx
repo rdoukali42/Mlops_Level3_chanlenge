@@ -46,24 +46,24 @@ const Level3Logo = () => {
     <div className="flex flex-col items-center size-full">
       <div className="glitch-container my-8 opacity-100 logo-rgb-shift" ref={logoRef}>
         <img 
-          src="/lovable-uploads/level3_image.webp" 
+          src="/images/level3_logo.png" 
           alt="LEVEL3" 
           className="glitch-image w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/level3_image.webp" 
+          src="/images/level3_logo.png" 
           alt="" 
           aria-hidden="true"
           className="glitch-image-1 w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/level3_image.webp" 
+          src="/images/level3_logo.png" 
           alt="" 
           aria-hidden="true"
           className="glitch-image-2 w-full max-w-[500px] h-auto logo-rgb-shift"
         />
         <img 
-          src="/lovable-uploads/level3_image.webp" 
+          src="/images/level3_logo.png" 
           alt="" 
           aria-hidden="true"
           className="glitch-image-3 w-full max-w-[500px] h-auto logo-rgb-shift"
